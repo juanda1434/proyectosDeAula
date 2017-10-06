@@ -1,0 +1,7 @@
+#bloquea directorios del proyecto
+Options ALL -Indexes
+#para poder utilizar rewriterule
+RewriteEngine on
+#convierte  las palabras en variables get
+RewriteRule ^(\w+)$ index.php?ubicacion=$1
+RewriteRule ^Validacion=(\w+)$ index.php?ubicacion=Validar&key=$1
