@@ -1,20 +1,17 @@
 <?php   
  if (isset($_GET["key"])) {
-     if (isset($_SESSION["id"])) {
+     
+     if (isset($_SESSION["perfil"])) {
         $controlador=new Controlador();
         $validacion=$controlador->validarRegistroEstudianteControlador($_GET["key"]);
-        if ($validacion) {
-//            header("location:Perfil");
-            echo "has sido validado papu";
+        if ($validacion) {            
+           header("location:Perfil");
         }else{
-//            header("location:Inicio");
-            echo "no te has podido validar papu la key no funciona papu";
+           header("location:Inicio");
         }
      }else{
-         $_SESSION["key"]=$_GET["key"];
         header("location:Ingresar");
      }
 }else{
-//    header("location:Inicio");
-    echo 'que haces aqui papu?';
+    header("location:Inicio");
 }

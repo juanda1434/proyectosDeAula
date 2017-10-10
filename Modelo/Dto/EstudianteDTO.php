@@ -59,5 +59,33 @@ class EstudianteDTO {
        return $this->codigoPrograma;
    }
 
+   function setNombre($nombre) {
+       $this->nombre = $nombre;
+   }
+
+   function setCorreo($correo) {
+       $this->correo = $correo;
+   }
+
+   function setCodigo($codigo) {
+       $this->codigo = $codigo;
+   }
+
+   function setDocumento($documento) {
+       $this->documento = $documento;
+   }
+
+   function setContrasenia($contrasenia) {
+       $this->contrasenia = $contrasenia;
+   }
+
+   function setCodigoPrograma($codigoPrograma) {
+       $this->codigoPrograma = $codigoPrograma;
+   }
+
+   function setValidarRegistro($validarRegistro) {
+       $this->validarRegistro = $validarRegistro;
+   }
+
 
 }

@@ -10,7 +10,11 @@
 
                         <div class="topbar-toggler" style="font-size: 10px; color: #eee; letter-spacing: 1px; text-transform: uppercase;"><span class="fa fa-angle-down"></span> PERFILES</div>
                         <ul class="topbar-list topbar-menu">
-                            <!-- AQUI SE METE LO DE LA BARRA SUPERIOR -->
+                            <?php
+                            if (isset($_SESSION["perfil"]) && $_SESSION["perfil"]["key"]) {
+                                echo '<li>No has validado tu registro. Has click <a href="Correo"><strong>AQUI!</strong></a> para enviar un correo de validacion.</li>';
+                            }
+                            ?>
                         </ul>
                     </div>
                     
@@ -70,50 +74,66 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
         <div class="container">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav padd" >
                
             <li class="dropdown">
                 <a href="Inicio" >
-                    Inicio
+                    Inicio <span class="glyphicon glyphicon-home"></span>
                 </a>
                 
             </li>
+            
             <li class="dropdown">
                 <a href="Significado" >
-                    ¿Que es?
+                    ¿Que es? <span class="glyphicon glyphicon-info-sign"></span>
                 </a>
                 
             </li>
             <li class="dropdown">
                 <a href="Importancia" >
-                    Importancia
+                    Importancia <span class="glyphicon glyphicon-info-sign"></span>
                 </a>
                 
             </li>
             <li class="dropdown">
                 <a href="Objetivos">
-                    Objetivos
+                   Objetivos <span class="glyphicon glyphicon-info-sign"></span>
                 </a>
                 
-            </li>
-<!--             <li class="dropdown">
+            </li>            
+            <?php 
+            if (!isset($_SESSION["perfil"])) {
+                  echo '<li class="dropdown">
                 <a href="Ingresar">
-                    Ingresar
+                    Ingresar <span class="glyphicon glyphicon-user"></span>
                 </a>
                 
-            </li>-->
-            <li class="dropdown">
-                <a href="#myModal1" data-toggle="modal" data-target="#modalIngresar">
-                    Ingresar
-                </a>
-                
-            </li>
-<li class="dropdown">
+            </li>';
+                  echo '<li class="dropdown">
                 <a href="Registro">
-                    Registrate
+                    Registrate <span class="glyphicon glyphicon-pencil"></span>
                 </a>
                 
-            </li>
+            </li>';
+}else{
+    $aux=' <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                        Usuario <span class="glyphicon glyphicon-user"></span>
+                    </a>
+                    
+                    <ul class="dropdown-menu">
+                    <li class="active"><a href="Perfil">Perfil</a></li>
+                        <li class="active"><a href="RegistrarProyecto">Registrar proyecto</a></li>
+                        
+
+</ul> </li>';
+    
+    echo $aux;
+   
+}
+            ?>
+             
+
             </ul>
         </div>
     </div><!--/navbar-collapse-->

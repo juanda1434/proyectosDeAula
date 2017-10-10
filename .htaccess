@@ -5,3 +5,5 @@ RewriteEngine on
 #convierte  las palabras en variables get
 RewriteRule ^(\w+)$ index.php?ubicacion=$1
 RewriteRule ^Validacion=(\w+)$ index.php?ubicacion=Validar&key=$1
+RewriteRule ^RegistrarProyecto=(\w+)$ index.php?ubicacion=RegistrarProyecto&id=$1
+RewriteRule ^Proyecto=(\w+)$ index.php?ubicacion=Validar&id=$1
