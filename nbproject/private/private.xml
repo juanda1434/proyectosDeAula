@@ -2,6 +2,21 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/xampp/htdocs/Proyectosdeaula/Vista/Public/js/Respuestas.js</file>
+            <file>file:/C:/xampp/htdocs/Proyectosdeaula/Vista/Public/js/Llenar.js</file>
+            <file>file:/C:/xampp/htdocs/Proyectosdeaula/Modelo/Negocio.php</file>
+            <file>file:/C:/xampp/htdocs/Proyectosdeaula/Vista/Plantilla.php</file>
+            <file>file:/C:/xampp/htdocs/Proyectosdeaula/Vista/Modulos/Header.php</file>
+            <file>file:/C:/xampp/htdocs/Proyectosdeaula/Vista/Modulos/BarraNavegacion/Perfil.php</file>
+            <file>file:/C:/xampp/htdocs/Proyectosdeaula/Controlador/Controlador.php</file>
+            <file>file:/C:/xampp/htdocs/Proyectosdeaula/Vista/Public/js/Registro.js</file>
+            <file>file:/C:/xampp/htdocs/Proyectosdeaula/Index.php</file>
+            <file>file:/C:/xampp/htdocs/Proyectosdeaula/Vista/Public/js/Login.js</file>
+            <file>file:/C:/xampp/htdocs/Proyectosdeaula/Vista/Modulos/BarraNavegacion/Ingresar.php</file>
+            <file>file:/C:/xampp/htdocs/Proyectosdeaula/Vista/Modulos/BarraNavegacion/Registro.php</file>
+            <file>file:/C:/xampp/htdocs/Proyectosdeaula/Vista/Modulos/Ajax.php</file>
+            <file>file:/C:/xampp/htdocs/Proyectosdeaula/Vista/Modulos/BarraNavegacion/Salir.php</file>
+        </group>
     </open-files>
 </project-private>

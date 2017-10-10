@@ -1,7 +1,3 @@
-function aux(elemento){
-    elemento.deleteClass("has-error");
-}
-
 $(document).ready(function () {
     $("#formRegistrarEstudiante").validate({
         
@@ -32,24 +28,34 @@ $(document).ready(function () {
                     codigoE: "Codigo vacio",
                     documentoE: {required: "Documento Vacio"},
                     contraseniaE: "Contraseña Vacia",
-                    programaE: "Seleccione un programa academico"
+                    programaE: {required:"Seleccione un programa academico"}
+                    
                 },
         submitHandler: function (form) {
-            var datos = {nombreE: "juan",
-                correoE: "juandavidsm@ufps.edu.co",
-                codigoE: "1308",
-                documentoE: "1090505894",
-                contraseniaE: "12345678",
-                programaAcademicoE: "115"
+            var datos = {nombreE: $("#nombreE").val(),
+                correoE: $("#correoE").val(),
+                codigoE: $("#codigoE").val(),
+                documentoE: $("#documentoE").val(),
+                contraseniaE: $("#contraseniaE").val(),
+                programaAcademicoE: $("select[name=programaE]").val()
 
             };
             $.ajax({
-                url: "vista/Modulos/Ajax.php",
+                url: "Vista/Modulos/Ajax.php",
                 method: 'POST',
                 data: datos,
+                dataType: 'json',
+                beforeSend :function (){
+                    respuestaInfoEspera("Espera un momento por favor.")
+                    
+                },
                 success: function (respuesta)
-                {
-                    console.log(respuesta);
+                { 
+                    if (respuesta["exito"]) {
+                        respuestaExito("Registro exitoso","Te has registro en el sistema. En breve recibiras un correo para validar tu registro.");
+                    }else if (!respuesta["exito"]) {
+                        respuestaError("Error Registro","Error : "+respuesta["error"]);
+                    }
 
                 }
             });
