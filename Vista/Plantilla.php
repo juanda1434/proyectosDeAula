@@ -47,7 +47,7 @@
 
         <link type="text/css" rel="stylesheet" href="Vista/Public/plantilla/css/line-icons.min.css">
 
-        <link type="text/css" rel="stylesheet" href="Vista/Public/plantilla/css/font-awesome.min.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <link type="text/css" rel="stylesheet" href="Vista/Public/plantilla/css/owl.carousel.min.css">
 
         <link type="text/css" rel="stylesheet" href="Vista/Public/plantilla/css/horizontal-parallax.min.css">
@@ -75,34 +75,40 @@
         <!--Estilo -->
         <link type="text/css" rel="stylesheet" href="Vista/Public/css/Estilos.css">
         
+        <!--card -->
+        <link type="text/css" rel="stylesheet" href="Vista/Public/css/card.css">
+        
+        <!--footable  -->
+        <link type="text/css" rel="stylesheet" href="Vista/Public/css/footable.bootstrap.css">
+        <link type="text/css" rel="stylesheet" href="Vista/Public/css/footable.bootstrap.min.css">
+        
+        <link type="text/css" rel="stylesheet" href="Vista/Public/css/Inicio.css">
+        
+        
 </head>
 
 
-    <body class="header-fixed boxed-layout" style="position: relative; min-height: 100%; top: 0px; box-sizing: border-box; background-size: cover; background-attachment: fixed; ">
+    <body class="header-fixed boxed-layout" style="position: relative; min-height: 100%; top: 0px;">
 
 
 <?php
             session_start();
             include 'Modulos/Header.php';
 
-
             $controlador = new Controlador();
             $controlador->generarVista();
             include_once 'Modulos/Footer.php';
             ?>
 
-<!-- This is the off-canvas sidebar -->
-<div id="my-id" class="uk-offcanvas">
-    
-</div>
+
 
         <!--=== End Footer Version 1 ===-->
         <script type="text/javascript" src="Vista/Public/plantilla/js/jquery.min.js"></script>
         
 		<script type="text/javascript" src="Vista/Public/plantilla/js/jquery-migrate.min.js"></script>
         
+                
 		<script type="text/javascript" src="Vista/Public/plantilla/js/bootstrap.min.js"></script>
-        
 		<script type="text/javascript" src="Vista/Public/plantilla/js/pgwslider.min.js"></script>
         
 		<script type="text/javascript" src="Vista/Public/plantilla/js/back-to-top.min.js"></script>
@@ -123,7 +129,8 @@
         
 		<script type="text/javascript" src="Vista/Public/plantilla/js/app.min.js"></script>
         
-		<script type="text/javascript" src="Vista/Public/plantilla/js/owl-carousel.min.js"></script>
+		
+                <script type="text/javascript" src="Vista/Public/plantilla/js/owl-carousel.min.js"></script>
         
 		<script type="text/javascript" src="Vista/Public/plantilla/js/datepicker.min.js"></script>
         
@@ -134,18 +141,41 @@
 		<script type="text/javascript" src="Vista/Public/plantilla/js/owl-recent-works.min.js"></script>
         
 		<script type="text/javascript" src="Vista/Public/plantilla/js/wow.min.js"></script>     
-        
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>   
+       
+                <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+                <!-- Materialize-->
+           <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+                
+           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+                
         <script type="text/javascript" src="Vista/Public/js/jquery.validate.js"></script> 
-        <script type="text/javascript" src="Vista/Public/js/Registro.js"></script> 
-        <script type="text/javascript" src="Vista/Public/js/Login.js"></script>
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        
+        
+                 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
         <script type="text/javascript" src="Vista/Public/js/Respuestas.js"></script>
+        <script type="text/javascript" src="Vista/Public/js/Registro.js"></script> 
+        <script type="text/javascript" src="Vista/Public/js/Login.js"></script>
+       
         <script  type="text/javascript" src="Vista/Public/js/Llenar.js"></script>
-
+        <?php 
+            if (isset($_GET["ubicacion"]) && ($_GET["ubicacion"]=="Proyecto" || $_GET["ubicacion"]=="RegistrarProyecto")) {  
+                echo '<script  type="text/javascript" src="Vista/Public/js/Proyecto.js"></script>';
+            }
+        ?>
         
+
+
+
+
+
+<!-- Footable-->
+<script  type="text/javascript" src="Vista/Public/js/footable.js"></script>
+<script  type="text/javascript" src="Vista/Public/js/footable.min.js"></script>
+
     </body>
+    
+    
 
     <?php
     ob_flush();

@@ -4,50 +4,53 @@ if (isset($_SESSION["perfil"])) {
   
 }
 ?>
-<div class="container">
+<div class="container contenedor" style="margin-top: 3%">
     
-    <h1 class="col-md-offset-4">Registro</h1>
+    <div class="row">
+        <div class="col-md-6 col-md-push-3 sombra">
+            
+            <h3 class="center">Registro</h3>
     
     <form class="form-horizontal" id="formRegistrarEstudiante">
         
     <div class="form-group">
-        <label class="control-label col-md-2 "  for="nombreE">Nombre</label>
-        <div class="col-md-6">
+        <div class="col-md-12">
+        <label class=""  for="nombreE">Nombre</label>        
             <input  name="nombreE" type="text" id="nombreE" class="form-control" >
-            <label id="error-nombreE"></label>
+            <label class="bg-danger" id="error-nombreE"></label>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="control-label col-md-2" for="correoE">Correo</label>
-        <div class="col-md-6">
+        <div class="col-md-12">
+        <label class="" for="correoE">Correo</label>        
         <input name="correoE" type="text" id="correoE" class="form-control" >
-        <label id="error-correoE"></label>
+        <label class="bg-danger" id="error-correoE"></label>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="control-label col-md-2" for="codigoE">Codigo</label>
-        <div class="col-md-6">
+        <div class="col-md-12">
+        <label class="" for="codigoE">Codigo</label>        
         <input name="codigoE" type="text" id="codigoE" class="form-control" > 
-        <label id="error-codigoE"></label>
+        <label class="bg-danger" id="error-codigoE"></label>
         </div>
     </div>
 
 
     <div class="form-group">
-        <label class="control-label col-md-2" for="documentoE">Documento</label>
-        <div class="col-md-6">
+         <div class="col-md-12">
+        <label class="" for="documentoE">Documento</label>       
         <input name="documentoE" type="text" id="documentoE" class="form-control" >
-        <label id="error-documentoE"></label>
+        <label class="bg-danger" id="error-documentoE"></label>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="control-label col-md-2" for="contraseniaE">Contrasenia</label>
-        <div class="col-md-6">
+        <div class="col-md-12">
+        <label class="" for="contraseniaE">Contrasenia</label>        
         <input name="contraseniaE" type="password" id="contraseniaE" class="form-control" >
-        <label id="error-contraseniaE"></label>
+        <label class="bg-danger" id="error-contraseniaE"></label>
         </div>
     </div>
 
@@ -59,6 +62,13 @@ if (isset($_SESSION["perfil"])) {
         <button class="btn btn-primary" type="submit">Aceptar</button>  
         </div>
             </div>
+            
+        </div>
+        
+        
+    </div>
+    
+    
 </form>
     
     

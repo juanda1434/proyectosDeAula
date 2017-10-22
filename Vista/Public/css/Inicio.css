@@ -1,0 +1,234 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.content-all{
+    width: 80%;
+    height: 400px;
+    position: relative;
+    display: flex;
+    margin: auto;
+    margin-top: 5%;
+    overflow: hidden;
+    perspective: 800px;
+    box-shadow: 0 20px 40px 0 black;
+}
+
+.content-img{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: all 1s;
+}
+
+
+
+#img1{
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.content-img:target{
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.content-img img{
+    width: 100%;
+    height: 100%;
+}
+
+
+.fa-arrow-left{
+    position: absolute;
+    top: 180px;
+    left: 0;
+    font-size: 40px;
+    text-decoration: none;
+    color: red;
+}
+
+.fa-arrow-right{
+    position: absolute;
+    top: 180px;
+    right: 0;
+    font-size: 40px;
+    text-decoration: none;
+    color: white;
+}
+
+.content-details{
+    position: relative;
+    top:-350px;
+    width: 200px;
+    margin-left: 940px;
+    margin-top: -1.5%;
+    padding: 10px;
+    background: rgba(0,0,0,0.5);
+    color: greenyellow;
+    text-align: center;
+    font-family: arial;
+}
+
+.content-details h3{
+    color: white;
+}
+
+.content-details p{
+    margin-top: 10px; 
+    color: white;
+}
+
+.content-details input[type="button"]{
+    padding: 6px 40px;
+    font-size: 18px;
+    margin-top: 10px;
+    background: rgba(755,10,0,0.5);
+    border-style: none;
+    color: white;
+    outline: 0px;
+    transition: all 300ms;
+}
+
+.content-details input[type="button"]:hover{
+    background: rgba(0,0,0,0.5);
+    transition: all 300ms; 
+}
+
+.social ul{
+list-style: none;
+margin: 0;
+} 
+.social ul li a{
+    display: inline-block;
+    color: white;
+    background: black;
+    padding: 10px 15px;
+    text-decoration: none;
+}
+
+.social ul li .fa-facebook{background: #3b5998; }
+.social ul li .fa-twitter{background: #00abf0; }
+.social ul li .fa-youtube{background: #c91032; }
+.social ul li .fa-instagram{ background: #d6249f; }
+.social ul li .fa-envelope-o{ background: #aaaaaa; }
+
+
+.social ul li a:hover{
+    padding: 10px 30px;
+    background: rgba(0,0,0,0.5);
+    transition: all 300ms;
+}
+
+.apoyo ul{
+list-style: none;
+margin: 0;
+} 
+.apoyo ul li a{
+    display: inline-block;
+    color: white;
+    background: black;
+    padding: 10px 15px;
+    text-decoration: none;
+}
+
+.apoyo ul li a#codetein{background: #007ee5; }
+.apoyo ul li a#tksis{background: #2ecc71; }
+.apoyo ul li a#docuxer{background: #c91032; }
+.apoyo ul li a#sanvicente{background: #b43432; }
+.apoyo ul li a#cinatic{background: #00f; }
+
+hr.style1 {
+    margin: 5%;
+    overflow: visible;
+    padding: 0;
+    border: none;
+    border-top: medium double #333;
+    color:#fff;
+    text-align: center;
+}
+
+hr.style1:after{
+    content: "Novedades";
+    display: inline-block;
+    position: relative;
+    top: -0.7em;
+    font-size: 2.5em;
+    padding: 0 0.25em;
+    background-color: #b43432;    
+    font-family: arial; 
+}
+
+hr.style1:hover{
+    background: #f1c40f;
+    color:#f1c40f;
+    box-shadow: 0 20px 40px 0 red;
+}
+
+.content-all#principal{
+    width: 100%;
+    height:500px;
+    position: relative;
+    display: flex;
+    margin: auto;
+    margin-top: 5%;
+    box-shadow:none;
+    background: #b43432;
+    
+}
+
+.content-all#principal div#noticias{
+    width: 100%;
+    height: 400px;  
+    padding: 0px 100px;
+    margin-top:3%;
+}
+
+
+.content-all#principal div#noticias div{
+    margin-top:1%;
+    margin: 1%;
+    width: 30%;
+    height: 380px;  
+    float: left;
+    box-shadow:none;
+    border: none;
+    border-top:5px solid #f1c40f;
+    background-color:#fff ;
+    text-align: center;
+    overflow: scroll;
+}
+
+.content-all#principal div#noticias div i.icon-custom{
+    position: absolute;
+    margin-top: -30px;
+    margin-left: -30px;
+}
+
+
+.content-all#principal div#noticias div h3{
+    margin-top: 40px; 
+    color: #666;
+    font-family: arial;
+    font-size: 25px; 
+}
+
+.content-all#principal div#noticias div p{
+    margin: 1%;
+    color: #aaaaaa;
+    font-family: arial;
+    font-size: 18px; 
+}
+
+
+.content-all#principal div#noticias div i h4.style_title{
+    background: #666;
+}
+
+

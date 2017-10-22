@@ -1,5 +1,5 @@
 
-function respuestaExito(titulo,mensaje){
+function respuestaExitoRecargar(titulo,mensaje){
     
     swal({
         title:titulo,
@@ -14,6 +14,13 @@ function respuestaExito(titulo,mensaje){
     
 }
 
+function respuestaExito(mensaje){
+    swal({
+        text:mensaje,
+        icon:"success"
+        
+    })
+}
 
 function respuestaError(titulo,mensaje){
     swal({
@@ -30,5 +37,13 @@ function respuestaInfoEspera(mensaje){
         closeOnClickOutside:false,
         closeOnEsc: false,
         icon:"info"
-    });
+    });    
+    
 }
+
+function respuestaPeligro(mensaje){
+        swal({
+        text:mensaje,
+        icon:"warning"
+    }); 
+    }

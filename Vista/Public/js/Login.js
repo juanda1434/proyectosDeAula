@@ -14,18 +14,18 @@ $(document).ready(function () {
             
         },
         rules: {            
-            correoI: {required: true, email: true},    
+            usuarioI: {required: true,number:true},    
             contraseniaI: {required: true}, 
         },
         messages:
                 {
-                    correoI: {required: "Email vacio", email: "Ingrese un email correcto (asdf@asdf.com)"},                   
+                    usuarioI: {required: "Usuario vacio", number: "Ingrese numeros por favor"},                   
                     contraseniaI: "Contraseña Vacia",
                     
                 },
         submitHandler: function (form) {
             var datos = {
-                correoI: $("#correoI").val(),
+                usuarioI: $("#usuarioI").val(),
                 contraseniaI: $("#contraseniaI").val(),
 
             };
@@ -41,7 +41,7 @@ $(document).ready(function () {
                 success: function (respuesta)
                 { 
                     if (respuesta["exito"]) {
-                        respuestaExito("Login exitoso","Te has logeado.");
+                        window.location.reload();
                     }else if (!respuesta["exito"]) {
                         respuestaError("Error Login","Error : "+respuesta["error"]);
                     }
@@ -51,6 +51,7 @@ $(document).ready(function () {
         }
     }
     );
+
 
 });
 

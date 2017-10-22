@@ -12,7 +12,7 @@
                         <ul class="topbar-list topbar-menu">
                             <?php
                             if (isset($_SESSION["perfil"]) && $_SESSION["perfil"]["key"]) {
-                                echo '<li>No has validado tu registro. Has click <a href="Correo"><strong>AQUI!</strong></a> para enviar un correo de validacion.</li>';
+                                echo '<li>No has validado tu registro. Has click <a id="btnEnviarCorreo" ><strong>AQUI!</strong></a> para enviar un correo de validacion.</li>';
                             }
                             ?>
                         </ul>
@@ -123,8 +123,8 @@
                     
                     <ul class="dropdown-menu">
                     <li class="active"><a href="Perfil">Perfil</a></li>
-                        <li class="active"><a href="RegistrarProyecto">Registrar proyecto</a></li>
-                        
+                        <li class="active"><a href="MisProyectos">Mis proyectos</a></li>
+                        <li class="active"><a href="Salir">Salir</a></li>
 
 </ul> </li>';
     

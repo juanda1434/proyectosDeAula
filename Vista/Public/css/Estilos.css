@@ -1,16 +1,47 @@
 
 .sombra{
     box-shadow: 2px 2px 5px #999;
-    margin-top: 20px;
-    background-color: #e0f3fe    
+   
 }
 
 .padd{
     padding-right: 5%
 }
 
+.contenedor{
+    padding-bottom: 5%;
+}
+
+.abajo{
+   margin-bottom: 200px;
+}
+
+    textarea.form-control {
+    max-width: 100%;
+    min-width: 100%;
+}
 @media only screen and (max-width: 1000px){
     .padd{
         padding-right: 0;
     }
+}
+
+.swal-footer {
+  background-color: rgb(245, 248, 250);
+  margin-top: 32px;
+  border-top: 1px solid #E9EEF1;
+  overflow: hidden;
+}
+
+.borde{border-radius: 10px 10px 10px 10px;
+-moz-border-radius: 10px 10px 10px 10px;
+-webkit-border-radius: 10px 10px 10px 10px;
+border: 0px solid #000000;
+}
+
+.borde2{
+    border-radius: 10px 10px 0px 0px;
+-moz-border-radius: 10px 10px 0px 0px;
+-webkit-border-radius: 10px 10px 0px 0px;
+border: 0px solid #000000;
 }

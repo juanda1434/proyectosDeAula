@@ -21,8 +21,8 @@ class EstudianteDTO {
    private $contrasenia;
    private $codigoPrograma;
    private $validarRegistro;
-   
-   function __construct($nombre, $correo, $codigo, $documento, $contrasenia, $codigoPrograma,$validarRegistro) {
+   private $id;
+   function __construct($nombre, $correo, $codigo, $documento, $contrasenia, $codigoPrograma,$validarRegistro,$id) {
        $this->nombre = $nombre;
        $this->correo = $correo;
        $this->codigo = $codigo;
@@ -30,6 +30,7 @@ class EstudianteDTO {
        $this->contrasenia = $contrasenia;
        $this->codigoPrograma = $codigoPrograma;
        $this->validarRegistro= $validarRegistro;
+       $this->id= $id;
    }
    function getValidarRegistro() {
        return $this->validarRegistro;
@@ -86,6 +87,14 @@ class EstudianteDTO {
    function setValidarRegistro($validarRegistro) {
        $this->validarRegistro = $validarRegistro;
    }
+   function getId() {
+       return $this->id;
+   }
+
+   function setId($id) {
+       $this->id = $id;
+   }
+
 
 
 }

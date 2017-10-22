@@ -65,9 +65,10 @@ class EstudianteDAO {
         $estudiante = false;
         try {
             $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $stm = $conexion->prepare("select nombre,correo,codigo,documento,codigoprograma,validarregistro from estudiante where correo=? and contrasenia=?");
-            $stm->bindParam(1, $estudianteDTO->getCorreo(), PDO::PARAM_STR);
-            $stm->bindParam(2, $estudianteDTO->getContrasenia(), PDO::PARAM_STR);
+            $stm = $conexion->prepare("select id,nombre,correo,codigo,documento,codigoprograma,validarregistro from estudiante where codigo=? and codigoprograma=? and contrasenia=?");
+            $stm->bindParam(1, $estudianteDTO->getCodigo(), PDO::PARAM_STR);
+            $stm->bindParam(2, $estudianteDTO->getCodigoPrograma(), PDO::PARAM_STR);
+            $stm->bindParam(3, $estudianteDTO->getContrasenia(), PDO::PARAM_STR);
             $ok = $stm->execute();
             if ($ok) {
                 $estudiante=$stm->fetch();
@@ -78,4 +79,19 @@ class EstudianteDAO {
         return $estudiante;
     }
 
+    
+    public function modificarKeyValidacion($estudianteDTO){
+        $negocio= Conexion::crearConexion();
+        $exito=false;
+        try {
+        $negocio->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+        $stm = $negocio->prepare("UPDATE estudiante set estudiante.validarregistro=? where estudiante.id=?");
+        $stm->bindParam(1, $estudianteDTO->getValidarRegistro(),  PDO::PARAM_STR);
+        $stm->bindParam(2, $estudianteDTO->getId(), PDO::PARAM_INT);
+        $exito= $stm->execute();
+        } catch (Exception $ex) {
+            
+        }
+        return $exito;;
+    }
 }
