@@ -47,6 +47,7 @@ function darFuncionFiltro(key) {
 function darFuncionEstadoFiltro(key) {
     var name = "#rad" + estadoFiltro[key];
     $(name).on("click", function () {
+        filtro.filtro.pagina=0;
         filtro.filtro.estado = estadoFiltro[key];
         enviarFiltro("Letras");
     });
@@ -54,6 +55,7 @@ function darFuncionEstadoFiltro(key) {
 function darFuncionFiltroParticipa() {
     var obj = $("#radParticipa");
     obj.on("click", function () {
+        filtro.filtro.pagina=0;
         filtro.filtro.participo = !filtro.filtro.participo;
         obj.prop("checked", filtro.filtro.participo);
         enviarFiltro("Letras");
@@ -126,10 +128,9 @@ function enviarFiltro(tipo) {
 
                         }
                          items += '</div>';
-                        $("#contenedorFerias").html(items);
-                        if (tipo=="Letras" && filtro.filtro.pagina==0) {
-                           
-
+                        
+                        if (tipo=="Letras") {
+                           $("#contenedorFerias").html(items);
                         var n = respuesta[respuesta.length - 1].total;
                         var aux = n / 6;
                         var cov = Math.ceil(aux);
@@ -144,7 +145,7 @@ function enviarFiltro(tipo) {
                         }
                         $(".pagination").html(izquierda + centro + izquierda);
                         }else if (tipo=="Numero") {
-                            
+                            $("#contenedorFerias").html(items);
                         }
                         
                     }
