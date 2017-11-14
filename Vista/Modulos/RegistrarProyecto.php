@@ -1,7 +1,7 @@
 <?php
 if (!isset($_SESSION["perfil"])) {
     header("location:Ingresar");
-} else if (!isset($_GET["id"])) {
+} else if (!isset($_GET["id"]) || $_SESSION["perfil"]["tipo"]!="Estudiante") {
     header("location:Inicio");
 } else {
     $controlador = new Controlador();

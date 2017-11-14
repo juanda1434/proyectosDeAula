@@ -16,18 +16,24 @@ $(document).ready(function () {
         rules: {            
             usuarioI: {required: true,number:true},    
             contraseniaI: {required: true}, 
+            tipoUsuarioI:{
+                        required:true
+                    }
         },
         messages:
                 {
                     usuarioI: {required: "Usuario vacio", number: "Ingrese numeros por favor"},                   
                     contraseniaI: "Contraseña Vacia",
+                    tipoUsuarioI:{
+                        required:"Seleccione un tipo de usuario"
+                    }
                     
                 },
         submitHandler: function (form) {
             var datos = {
                 usuarioI: $("#usuarioI").val(),
                 contraseniaI: $("#contraseniaI").val(),
-
+                tipoUsuarioI:$("select[name=tipoUsuarioI]").val()
             };
             $.ajax({
                 url: "Vista/Modulos/Ajax.php",

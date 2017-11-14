@@ -7,6 +7,7 @@ RewriteRule ^(\w+)$ index.php?ubicacion=$1
 
 RewriteRule ^Validacion=(\w+)$ index.php?ubicacion=Validar&key=$1
 RewriteRule ^Inscribir=(\d+)$ index.php?ubicacion=RegistrarProyecto&id=$1
-RewriteRule ^Proyecto=(\d+)$ index.php?ubicacion=Proyecto&id=$1
+RewriteRule ^LProyecto=(\d+)$  index.php?ubicacion=Proyecto&id=$1
 RewriteRule ^Feria=(\d+)$ index.php?ubicacion=Feria&id=$1
 RewriteRule ^unirse=(\d+)-(\w+)$ index.php?ubicacion=ValidarUnion&id=$1&key=$2
+RewriteRule ^Calificar=(\d+)&(\d+)$ index.php?ubicacion=IngresarCalificacion&proyecto=$1&feria=$2

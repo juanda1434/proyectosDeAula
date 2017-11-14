@@ -36,7 +36,16 @@ if (isset($_SESSION["perfil"])) {
             <input type="password" id="contraseniaI" name="contraseniaI" class="form-control" >
             <label class="bg-danger" id="error-contraseniaI"></label>     
     </div></div>
-
+<div class="form-group">
+        <div class="col-md-12">
+        <label class="" for="tipoUsuarioI">Tipo usuario</label>       
+        <select id="tipoUsuarioI" name="tipoUsuarioI" class="form-control"> 
+            <option value="">Seleccione tipo de usuario</option>
+            <option value="estudiante">Estudiante</option>
+            <option value="evaluador">Evaluador</option>
+        </select>
+            <label class="bg-danger" id="error-tipoUsuarioI"></label>     
+    </div></div>
 
         <div class="form-group">
             <div class="col-md-2 col-md-push-4"> 

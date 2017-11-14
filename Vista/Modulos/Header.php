@@ -11,7 +11,7 @@
                         <div class="topbar-toggler" style="font-size: 10px; color: #eee; letter-spacing: 1px; text-transform: uppercase;"><span class="fa fa-angle-down"></span> PERFILES</div>
                         <ul class="topbar-list topbar-menu">
                             <?php
-                            if (isset($_SESSION["perfil"]) && $_SESSION["perfil"]["key"]) {
+                            if (isset($_SESSION["perfil"])&&$_SESSION["perfil"]["tipo"]=="Estudiante" && $_SESSION["perfil"]["key"]) {
                                 echo '<li>No has validado tu registro. Has click <a id="btnEnviarCorreo" ><strong>AQUI!</strong></a> para enviar un correo de validacion.</li>';
                             }
                             ?>

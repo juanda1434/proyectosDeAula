@@ -1,18 +1,22 @@
 <?php
 
 class Controlador {
+private $negocio;
+    public function __construct() {
+        $this->negocio=new Negocio();
+    }
+
 
     public function generarPlantilla() {
         return Negocio::generarPlantilla();
     }
 
     public function generarVista() {
-        $negocio = new Negocio();
         $enlace = filter_input(INPUT_GET, "ubicacion");
         if ($enlace) {
-            $enlace = $negocio->generarEnlace($enlace);
+            $enlace = $this->negocio->generarEnlace($enlace);
         } else {
-            $enlace = $negocio->generarEnlace("Inicio");
+            $enlace = $this->negocio->generarEnlace("Inicio");
                     echo "<script>location.href= 'Inicio' </script>";
 
         }
@@ -20,55 +24,45 @@ class Controlador {
     }
 
     public function registrarEstudianteControlador($estudianteDTO) {
-        $negocio = new Negocio();
-        return $negocio->registrarEstudianteNegocio($estudianteDTO);
+        return $this->negocio->registrarEstudianteNegocio($estudianteDTO);
     }
 
     public function validarRegistroEstudianteControlador($llaveValidacion) {
-        $negocio = new Negocio();
-        return $negocio->validarRegistroEstudianteNegocio($llaveValidacion);
+        return $this->negocio->validarRegistroEstudianteNegocio($llaveValidacion);
     }
 
     
     public function listarProgramasAcademicosControlador() {
-        $negocio= new Negocio();
-        return $negocio->listarProgramasAcademicosNegocio();
+        return $this->negocio->listarProgramasAcademicosNegocio();
         
     }
     
     public function ingresarEstudianteControlador($estudianteDTO) {
-        $negocio=new Negocio();
-        return $negocio->ingresarEstudianteNegocio($estudianteDTO);
+        return $this->negocio->ingresarEstudianteNegocio($estudianteDTO);
     }
     
     public function listarDatosPerfilControlador(){
-        $negocio= new Negocio();
-        return $negocio->listarDatosPerfilNegocio();
+        return $this->negocio->listarDatosPerfilNegocio();
     }
     
     public function listarDocentesControlador(){
-        $negocio= new Negocio();
-        return $negocio->listarDocentesNegocio();        
+        return $this->negocio->listarDocentesNegocio();        
     }
     
     public function listarAsignaturasControlador() {
-        $negocio= new Negocio();
-        return $negocio->listarAsignaturasNegocio();
+        return $this->negocio->listarAsignaturasNegocio();
     }
     
     public function listarLineasInvestigacionControlador() {
-        $negocio=new Negocio();
-        return $negocio->listarLineasInvestigacionNegocio();
+        return $this->negocio->listarLineasInvestigacionNegocio();
     }
     
     public function guardarTutoriaControlador($tutoriaDTO){
-        $negocio= new Negocio();
-        return $negocio->guardarTutoriaNegocio($tutoriaDTO);
+        return $this->negocio->guardarTutoriaNegocio($tutoriaDTO);
     }
     
     public function listarTutoriasControlador() {
-       $negocio= new Negocio();
-       return $negocio->listarTutoriasNegocio();
+       return $this->negocio->listarTutoriasNegocio();
     }
     
     
@@ -76,49 +70,61 @@ class Controlador {
     
     
     public function validarFeriaControlador($id){
-        $negocio=new Negocio();
-        return $negocio->validarFeriaNegocio($id);
+        return $this->negocio->validarFeriaNegocio($id);
     }
     
     public function registrarProyectoControlador($proyectoDTO){
-        $negocio=new Negocio();
-        return $negocio->registrarProyectoNegocio($proyectoDTO);
+        return $this->negocio->registrarProyectoNegocio($proyectoDTO);
     }
     
-    public function listarFeriaFiltroControlador($filtro) {
-        $negocio=new Negocio();
-        return $negocio->listarFeriasFiltroNegocio($filtro);
-        
-    }
+    
     
     public function enviarCorreoValidacionControlador(){
-        $negocio=new Negocio();
-        return $negocio->enviarCorreoValidacionNegocio();
+        return $this->negocio->enviarCorreoValidacionNegocio();
          
     }
     
     public function listarProyectoIdControlador(){
-        $negocio=new Negocio();
-        return $negocio->listarProyectoIdNegocio();
+        return $this->negocio->listarProyectoIdNegocio();
     }
     
     public function listarMisProyectosControlador(){
-        $negocio=new Negocio();
-        return $negocio->listarMisProyectosNegocio();
+        return $this->negocio->listarMisProyectosNegocio();
     }
     
     public function mostrarFeriaIdControlador(){
-        $negocio= new Negocio();
-        return $negocio->mostrarFeriaIdNegocio();
+        return $this->negocio->mostrarFeriaIdNegocio();
     }
     
     public function invitarCompanieroControlador($correo) {
-        $negocio= new Negocio();
-        return $negocio->invitarCompanieroNegocio($correo);
+        return $this->negocio->invitarCompanieroNegocio($correo);
     }
     
     public function validarUnionProyectoControlador($key,$proyectoEstudianteDTO){
-        $negocio=new Negocio();
-        return $negocio->validarUnionProyectoNegocio($key, $proyectoEstudianteDTO);
+        return $this->negocio->validarUnionProyectoNegocio($key, $proyectoEstudianteDTO);
+    }
+    
+    public function ingresarEvaluadorControlador($evaluadorDTO) {
+        return $this->negocio->ingresarEvaluadorNegocio($evaluadorDTO);
+    }
+    
+    public function listarFeriaControlador($filtro){
+        return $this->negocio->listarFeriaFiltroNegocio($filtro);
+    }
+    
+    public function mostrarCriteriosEvaluarControlador(){
+        return $this->negocio->mostrarCriteriosEvaluarNegocio();
+    }
+    
+    public function validarProyectoEvaluadorControlador(){
+        return $this->negocio->validarProyectoEvaluadorNegocio();
+    }
+    
+    public function modificarNotaTemporalControlador($idCriterio,$nota,$observacion){
+        return $this->negocio->modificarNotaTemporalNegocio($idCriterio,$nota,$observacion);
+    }
+    
+    public function registrarCalifacionControlador($calificaciones){
+        return $this->negocio->registrarCalificacionNegocio($calificaciones);
     }
 }

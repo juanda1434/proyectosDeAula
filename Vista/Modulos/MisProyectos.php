@@ -18,7 +18,7 @@ if (!isset($_SESSION["perfil"])) {
             <table class='footable table-striped ' data-paging='true' data-sorting='true' data-filtering='true'>
 
                 <thead>
-                    <tr>
+                    <tr id="cabeceraMisProyectos">
                         <th >
                             Titulo proyecto                        
                         </th>

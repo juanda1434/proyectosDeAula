@@ -1,8 +1,15 @@
 <?php
+
 if (!isset($_GET["id"])) {
-    header("Inicio");
+    header("location:Inicio");
 }
 $_SESSION["idFeria"]=$_GET["id"];
+$controlador=new Controlador();
+$exito=$controlador->mostrarFeriaIdControlador();
+
+if (!$exito) {
+    header("location:Inicio");
+}
 ?>
 
 
@@ -44,45 +51,6 @@ $_SESSION["idFeria"]=$_GET["id"];
                 </thead>
                 
                 <tbody id="tablaCriterios">
-                    <tr>
-                        <td>
-                            <b> Presentacion ( x Puntos )</b>                            
-                        </td>
-                        <td>                            
-                        </td>                        
-                    </tr>
-                    <tr>
-                        <td>
-                            <b>Creatividad y diseño : </b>
-                            <p>El evaluador debe determinar si presenta una organizacion y diseño que faciliten la presentacion del proyecto de aula</p>
-                        </td>
-                        <td>
-                            <p class="text-center"> 10</p>
-                        </td>                        
-                    </tr>
-                    <tr>
-                        <td>
-                            <b>Puntualidad y responsabilidad : </b>
-                            <p>Todos los participantes deben estar presentes en la evaluacion</p>
-                        </td>
-                        <td>
-                            <p class="text-center"> 10</p>
-                        </td>                        
-                    </tr>
-                    <tr>
-                        <td>
-                            <b>Proyecto de aula ( x Puntos ) </b> </td>
-                        <td></td>                        
-                    </tr>
-                    <tr>
-                        <td>
-                            <b>Pertinencia :</b>
-                            <p>adecuación de los objetivos a las necesidades de la asignatura impartida.</p>
-                        </td>
-                        <td>
-                            <p class="text-center"> 10</p>
-                        </td>                        
-                    </tr>
                 </tbody>
             </table>
             
