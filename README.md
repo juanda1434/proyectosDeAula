@@ -1,7 +1,10 @@
 # proyectosDeAula
 
-Para probar el proyecto no se les olvide que deben crear la base de datos en el phpmyadmin.
+Proyecto para gestion de proyectos de Aula de la universidad francisco de paula santander Ingenieria de sistemas.
 
+Inscripcion de proyectos.
 
-ESTA ADJUNTO EL FERIA.SQL PUEDEN IMPORTARLO EN UNA BASEDEDATOS O COPIAR Y PEGAR TODO EL SQL EN LA CONSOLA DEL PHPMYADMIN YA VIENE CON DATOS PARA QUE PRUEBEN LO QUE SE HA ALCANZADO A IMPLEMENTAR
+Calificacion de proyectos por jurados seleccionados.
+
+Listado de proyectos ganadores
 
