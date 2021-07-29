@@ -3,9 +3,15 @@
 
 class CriterioFeriaDAO {
  
+     private $conexion;
+    public function __construct() {
+        $conn = new Conexion();
+        $this->conexion=$conn->crearConexion();
+    }
+    
     public function listarCriterios($idFeria) {
         
-        $conexion = Conexion::crearConexion();
+        $conexion = $this->conexion;
         $tipoCriterio = false;
         $descripcionCriteros = false;
         $criterios = false;

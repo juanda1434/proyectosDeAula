@@ -8,7 +8,7 @@ private $negocio;
 
 
     public function generarPlantilla() {
-        return Negocio::generarPlantilla();
+        return $this->negocio->generarPlantilla();
     }
 
     public function generarVista() {
@@ -119,6 +119,9 @@ private $negocio;
     public function validarProyectoEvaluadorControlador(){
         return $this->negocio->validarProyectoEvaluadorNegocio();
     }
+    public function validarEvaluadorProyectoControlador(){
+        return $this->negocio->validarEvaluadorProyectoNegocio();
+    }
     
     public function modificarNotaTemporalControlador($idCriterio,$nota,$observacion){
         return $this->negocio->modificarNotaTemporalNegocio($idCriterio,$nota,$observacion);
@@ -126,5 +129,40 @@ private $negocio;
     
     public function registrarCalifacionControlador($calificaciones){
         return $this->negocio->registrarCalificacionNegocio($calificaciones);
+    }
+    
+    public function recuperarContraseniaEstudianteControlador($estudianteDTO){
+       return $this->negocio->recuperarContraseniaEstudianteNegocio($estudianteDTO);
+    }
+     public function recuperarContraseniaEvaluadorControlador($evaluadorDTO){
+       return $this->negocio->recuperarContraseniaEvaluadorNegocio($evaluadorDTO);
+    }
+    
+    public function validarRecuperarContraseniaControlador($usuario,$key,$tipo){
+        return $this->negocio->validarRecuperarContraseniaNegocio($usuario, $key, $tipo);
+    }
+    
+    public function ingresarContraseniaNuevaRecuperacionControlador($contrasenia){
+        return $this->negocio->ingresarContraseniaNuevaRecuperacionNegocio($contrasenia);
+    }
+    
+    public function actualizarContraseniaControlador($contrasenia){
+        return $this->negocio->actualizarContraseniaNegocio($contrasenia);
+    }
+    
+    public function actualizarDatoProyectoControlador($nombre,$dato){
+        return $this->negocio->actualizarDatoProyectoNegocio($nombre,$dato);
+    }
+    
+    public function listarGanadoresFeriaControlador(){
+        return $this->negocio->listarGanadoresFeriaNegocio();
+    }
+    
+    public function listarProyectosCantidadEvaluacionesControlador(){
+        return $this->negocio->listarProyectosCantidadEvaluacionesNegocio();
+    }
+    
+    public function consultaRene(){
+        return $this->negocio->consultaRene();
     }
 }

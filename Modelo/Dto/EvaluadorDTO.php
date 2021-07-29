@@ -17,13 +17,16 @@ class EvaluadorDTO {
     private $correo;
     private $contrasenia;
     private $documento;
+    private $validarRegistro;
+    private $validarContrasenia;
     
-    
-    function __construct($nombre, $correo, $contrasenia, $documento) {
+    function __construct($nombre, $correo, $contrasenia, $documento,$validarRegistro,$validarContrasenia) {
         $this->nombre = $nombre;
         $this->correo = $correo;
         $this->contrasenia = $contrasenia;
         $this->documento = $documento;
+        $this->validarRegistro=$validarRegistro;
+        $this->validarContrasenia=$validarContrasenia;
     }
     
     function getNombre() {
@@ -56,6 +59,14 @@ class EvaluadorDTO {
 
     function setDocumento($documento) {
         $this->documento = $documento;
+    }
+
+    function getValidarRegistro() {
+        return $this->validarRegistro;
+    }
+
+    function getValidarContrasenia() {
+        return $this->validarContrasenia;
     }
 
 

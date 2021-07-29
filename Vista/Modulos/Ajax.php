@@ -24,15 +24,22 @@ require_once '../../Modelo/Dao/CriterioFeriaDAO.php';
 
 class Ajax {
 
+    private $controlador;
+
+    public function __construct() {
+        $this->controlador = new Controlador();
+    }
+
     public function registrarEstudianteAjax($nombre, $codigo, $correo, $documento, $contrasenia, $programaAcademico) {
 
-        $controlador = new Controlador();
+        $controlador = $this->controlador;
         $validarRegistro = md5(time());
         $estudianteDTO = new EstudianteDTO($nombre, $correo, $codigo, $documento, $contrasenia, $programaAcademico, $validarRegistro, null);
         try {
             $exito = $controlador->registrarEstudianteControlador($estudianteDTO);
             if ($exito) {
-                echo json_encode(array("exito" => true));
+                $respuesta = array("exito" => true);
+                echo json_encode($respuesta);
             } else {
                 echo json_encode(array("exito" => false, "error" => "No se pudo registrar un estudiante"));
             }
@@ -42,7 +49,7 @@ class Ajax {
     }
 
     public function listarProgramasAcademicosAjax() {
-        $controlador = new Controlador();
+        $controlador = $this->controlador;
         $aux = "";
         try {
             $aux = json_encode($controlador->listarProgramasAcademicosControlador());
@@ -53,12 +60,13 @@ class Ajax {
         echo $aux;
     }
 
-    public function ingresarUsuarioAjax($usuario, $contrasenia, $tipoUsuario) {
+    public function ingresarUsuarioAjax($usuario, $contrasenia, $tipoUsuario) {        
         $exito = false;
         try {
             switch ($tipoUsuario) {
                 case "estudiante":
                     $exito = $this->ingresarEstudianteAjax($usuario, $contrasenia);
+
                     break;
                 case "evaluador":
                     $exito = $this->ingresarEvaluadorAjax($usuario, $contrasenia);
@@ -68,7 +76,13 @@ class Ajax {
             echo json_encode(array("exito" => false, "error" => $exc->getMessage()));
         }
         if ($exito) {
-            echo json_encode(array("exito" => true));
+            $respuesta = array("exito" => true);
+            if (isset($_SESSION["validarUnion"])) {
+                $respuesta["redireccionarUnion"] = array("id" => $_SESSION["validarUnion"]["id"], "key" => $_SESSION["validarUnion"]["key"]);
+            }else if (isset ($_SESSION["validarRegistro"])) {
+                $respuesta["redireccionarValidar"]= array("key"=>$_SESSION["validarRegistro"]);
+            }
+            echo json_encode($respuesta);
         } else {
             echo json_encode(array("exito" => false, "error" => "Usuario o contrasenia incorrecta"));
         }
@@ -76,22 +90,22 @@ class Ajax {
 
     private function ingresarEstudianteAjax($usuario, $contrasenia) {
         session_start();
-        $controlador = new Controlador();
+        $controlador = $this->controlador;
         $codigoP = substr($usuario, 0, 3);
         $codigoE = substr($usuario, 3, 4);
-        return $controlador->ingresarEstudianteControlador(new EstudianteDTO(null, null, $codigoE, null, $contrasenia, $codigoP, null, null));
+        return $controlador->ingresarEstudianteControlador(new EstudianteDTO(null, null, $codigoE, null, $contrasenia, $codigoP, null, null, null));
     }
 
     private function ingresarEvaluadorAjax($usuario, $contrasenia) {
         session_start();
-        $controlador = new Controlador();
-        return $controlador->ingresarEvaluadorControlador(new EvaluadorDTO(null, null, $contrasenia, $usuario));
+        $controlador = $this->controlador;
+        return $controlador->ingresarEvaluadorControlador(new EvaluadorDTO(null, null, $contrasenia, $usuario, null, null));
     }
 
     public function listarDatosPerfilAjax() {
         session_start();
         try {
-            $controlador = new Controlador();
+            $controlador = $this->controlador;
             if (isset($_SESSION["perfil"])) {
                 echo json_encode($controlador->listarDatosPerfilControlador());
             }
@@ -103,7 +117,7 @@ class Ajax {
     public function listarDocentesAjax() {
         session_start();
         try {
-            $controlador = new Controlador();
+            $controlador = $this->controlador;
             if (isset($_SESSION["perfil"])) {
                 echo json_encode($controlador->listarDocentesControlador());
             } else {
@@ -117,7 +131,7 @@ class Ajax {
     public function listarAsignaturasAjax() {
         session_start();
         try {
-            $controlador = new Controlador();
+            $controlador = $this->controlador;
             if (isset($_SESSION["perfil"])) {
                 echo json_encode($controlador->listarAsignaturasControlador());
             }
@@ -128,7 +142,7 @@ class Ajax {
 
     public function listarLineasInvestigacionAjax() {
         try {
-            $controlador = new Controlador();
+            $controlador = $this->controlador;
 
             $lineas = $controlador->listarLineasInvestigacionControlador();
             if ($lineas) {
@@ -146,9 +160,9 @@ class Ajax {
 
         try {
             try {
-                $controlador = new Controlador();
+                $controlador = $this->controlador;
                 $codigoProgramaDocente = substr($codigoDocente, 0, 3);
-                $codigoDocente = substr($codigoDocente, 3, 4);
+                $codigoDocente = substr($codigoDocente, 3, 5);
                 $codigoProgramaAsignatura = substr($codigoAsignatura, 0, 3);
                 $codigoAsignatura = substr($codigoAsignatura, 3, 4);
                 $tutoriaDTO = new TutoriaDTO($codigoDocente, $codigoAsignatura, $codigoProgramaDocente, $codigoProgramaAsignatura);
@@ -170,7 +184,7 @@ class Ajax {
         session_start();
         try {
             if (isset($_SESSION["perfil"])) {
-                $controlador = new Controlador();
+                $controlador = $this->controlador;
                 $tutorias = $controlador->listarTutoriasControlador();
                 echo json_encode($tutorias);
             } else {
@@ -183,7 +197,7 @@ class Ajax {
 
     public function registrarProyectoAjax($titulo, $resumen, $linea) {
         session_start();
-        $controlador = new Controlador();
+        $controlador = $this->controlador;
         $proyectoDTO = new ProyectoDTO(NULL, $linea, NULL, $titulo, $resumen, null);
         try {
             $exito = $controlador->registrarProyectoControlador($proyectoDTO);
@@ -198,7 +212,7 @@ class Ajax {
     }
 
     public function enviarCorreoValidacionAjax() {
-        $controlador = new Controlador();
+        $controlador = $this->controlador;
         session_start();
         try {
             $exito = $controlador->enviarCorreoValidacionControlador();
@@ -215,7 +229,7 @@ class Ajax {
     public function listarProyectoIdAjax() {
         session_start();
         try {
-            $controlador = new Controlador();
+            $controlador = $this->controlador;
             $proyecto = $controlador->listarProyectoIdControlador();
             if ($proyecto) {
                 $proyecto["exito"] = true;
@@ -231,7 +245,7 @@ class Ajax {
     public function listarMisProyectosAjax() {
         try {
             session_start();
-            $controlador = new Controlador;
+            $controlador = $this->controlador;
             $proyectos = $controlador->listarMisProyectosControlador();
             if ($proyectos) {
                 $proyectos[count($proyectos) - 1]["exito"] = true;
@@ -247,7 +261,7 @@ class Ajax {
     public function mostrarFeriaIdAjax() {
         try {
             session_start();
-            $controlador = new Controlador();
+            $controlador = $this->controlador;
             $feria = $controlador->mostrarFeriaIdControlador();
             if ($feria) {
                 $feria["exito"] = true;
@@ -263,7 +277,7 @@ class Ajax {
     public function invitarCompanieroAjax($correo) {
         try {
             session_start();
-            $controlador = new Controlador();
+            $controlador = $this->controlador;
             $correoEnviado = $controlador->invitarCompanieroControlador($correo);
             if ($correoEnviado) {
                 echo json_encode(array("exito" => true));
@@ -276,21 +290,22 @@ class Ajax {
     }
 
     public function listarFeriaFiltroAjax($filtro) {
-
         try {
             if ($filtro["orden"] == "true") {
                 $filtro["orden"] = "asc";
             } else if ($filtro["orden"] == "false") {
                 $filtro["orden"] = "desc";
             }
-            $controlador = new Controlador();
+            $controlador = $this->controlador;
             $ferias = $controlador->listarFeriaControlador($filtro);
             if ($ferias) {
                 if (count($ferias) < 2) {
                     echo json_encode(array("exito" => false));
-                } else
+                } else {
+//                    echo json_encode($ferias);
                     echo json_encode($ferias);
-            }else {
+                }
+            } else {
                 echo json_encode(array("exito" => false));
             }
         } catch (Exception $ex) {
@@ -301,7 +316,7 @@ class Ajax {
     public function listarCalificarAjax() {
         try {
             session_start();
-            $controlador = new Controlador();
+            $controlador = $this->controlador;
             $criterios = $controlador->mostrarCriteriosEvaluarControlador();
             if ($criterios) {
                 echo json_encode($criterios);
@@ -316,7 +331,7 @@ class Ajax {
     public function modificarNotaTemporalAjax($idCriterio, $nota, $observacion) {
         try {
             session_start();
-            $controlador = new Controlador();
+            $controlador = $this->controlador;
             $exito = $controlador->modificarNotaTemporalControlador($idCriterio, $nota, $observacion);
             echo json_encode($exito);
         } catch (Exception $ex) {
@@ -327,7 +342,7 @@ class Ajax {
     public function registrarCalificacionAjax($calificaciones) {
         try {
             session_start();
-            $controlador = new Controlador();
+            $controlador = $this->controlador;
             $exito = false;
             $exito = $controlador->registrarCalifacionControlador($calificaciones);
             if ($exito) {
@@ -336,7 +351,98 @@ class Ajax {
                 echo json_encode(array("exito" => $exito, "error" => "No se pudo ingresar calificacion final. Por favor recargue al pagina e ingrese de nuevo las notas."));
             }
         } catch (Exception $ex) {
-           echo json_encode(array("exito" => $exito, "error" => "No se pudo ingresar calificacion final. Por favor recargue al pagina e ingrese de nuevo las notas."));
+            echo json_encode(array("exito" => $exito, "error" => "No se pudo ingresar calificacion final. Por favor recargue al pagina e ingrese de nuevo las notas."));
+        }
+    }
+
+    public function recuperarContraseniaAjax($correo, $usuario, $tipoUsuario) {
+        switch ($tipoUsuario) {
+            case "evaluador":
+                $this->recuperarContraseniaEvaluador($usuario, $correo);
+                break;
+            case "estudiante":
+                $this->recuperarContraseniaEstudiante($usuario, $correo);
+                break;
+        }
+    }
+
+    private function recuperarContraseniaEstudiante($usuario, $correo) {
+        $codigoP = substr($usuario, 0, 3);
+        $codigoE = substr($usuario, 3, 4);
+        $validar = md5(time());
+        $exito = false;
+        $estudianteDTO = new EstudianteDTO(null, $correo, $codigoE, null, null, $codigoP, null, null, $validar);
+        try {
+            $exito = $this->controlador->recuperarContraseniaEstudianteControlador($estudianteDTO);
+            if ($exito) {
+                echo json_encode(Array("exito" => true));
+            } else {
+                echo json_encode(array("exito" => false));
+            }
+        } catch (Exception $ex) {
+            echo json_encode(array("exito" => false));
+        }
+    }
+
+    private function recuperarContraseniaEvaluador($usuario, $correo) {
+        $validar = md5(time());
+        $exito = false;
+        $evaluadorDTO = new EvaluadorDTO(NULL, $correo, null, $usuario, NULL, $validar);
+        try {
+            $exito = $this->controlador->recuperarContraseniaEvaluadorControlador($evaluadorDTO);
+            if ($exito) {
+                echo json_encode(Array("exito" => true));
+            } else {
+                echo json_encode(array("exito" => false));
+            }
+        } catch (Exception $ex) {
+            echo json_encode(array("exito" => false));
+        }
+    }
+
+    public function ingresarContraseniaNuevaRecuperacionAjax($contrasenia) {
+        $exito = false;
+        session_start();
+        try {
+            $exito = $this->controlador->ingresarContraseniaNuevaRecuperacionControlador($contrasenia);
+            if ($exito) {
+                echo json_encode(array("exito" => true));
+            } else {
+                echo json_encode(array("exito" => false));
+            }
+        } catch (Exception $ex) {
+            echo json_encode(array("exito" => false));
+        }
+    }
+    
+    public function actualizarContraseniaAjax($contrasenia){
+        $exito=false;
+        session_start();
+        try {
+            $exito=$this->controlador->actualizarContraseniaControlador($contrasenia);
+            if ($exito) {
+                echo json_encode(array("exito"=>true));
+            }else{
+                echo json_encode(array("exito"=>false));
+            }
+        } catch (Exception $ex) {
+            echo json_encode(array("exito"=>false));
+        }
+    }
+    
+    public function actualizarDatoProyectoAjax($nombre,$dato){
+        $exito=false;
+        session_start();
+        try {
+            $exito=$this->controlador->actualizarDatoProyectoControlador($nombre, $dato);
+            if ($exito) {
+                echo json_encode(array("exito"=>true));
+            }else{
+                echo json_encode(array("exito"=>false));
+            }
+        } catch (Exception $ex) {
+            echo json_encode(array("exito"=>false,"error"=>$ex->getMessage()));
+            
         }
     }
 
@@ -408,6 +514,19 @@ $actualizarNotaTemporal = isset($_POST["idCriterioM"], $_POST["actualizarNotaTem
 $registrarCalificacion = isset($_POST["enviarCalificacionC"], $_POST["datosCalificacion"]);
 
 
+//si esta variable es true significa que debe recuperar la contrasenia
+$recuperarContrasenia = isset($_POST["usuarioRe"], $_POST["correoRe"], $_POST["tipoUsuarioRe"]);
+
+//si esta variable es true signficia que debe ingresar la contraseña nueva por recuperacion de contraseña
+$ingresarContraRecupera = isset($_POST["contraseniaNueva"]);
+
+
+//si esta variable es true significa que debe actualizar la contraseña
+$actualizarContrasenia=  isset($_POST["contraNueva"]);
+
+
+//si esta variable es true significa que debe actualizar un dato del proyecto
+$actualizarDatoProyecto= isset($_POST["actualizarDatoProyecto"]);
 
 if ($listarFeriaFiltro) {
     $ajax->listarFeriaFiltroAjax($_POST["filtro"]);
@@ -448,4 +567,12 @@ if ($registrarEstudiante) {
     $ajax->modificarNotaTemporalAjax($_POST["idCriterioM"], $_POST["notaM"], $_POST["observacionM"]);
 } else if ($registrarCalificacion) {
     $ajax->registrarCalificacionAjax($_POST["datosCalificacion"]);
+} else if ($recuperarContrasenia) {
+    $ajax->recuperarContraseniaAjax($_POST["correoRe"], $_POST["usuarioRe"], $_POST["tipoUsuarioRe"]);
+} else if ($ingresarContraRecupera) {
+    $ajax->ingresarContraseniaNuevaRecuperacionAjax($_POST["contraseniaNueva"]);
+}else if ($actualizarContrasenia) {
+    $ajax->actualizarContraseniaAjax($_POST["contraNueva"]);
+}else if ($actualizarDatoProyecto) {
+    $ajax->actualizarDatoProyectoAjax($_POST["actualizarDatoProyecto"]["nombre"], $_POST["actualizarDatoProyecto"]["dato"]);
 }

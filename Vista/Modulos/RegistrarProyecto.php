@@ -15,26 +15,26 @@ if (!isset($_SESSION["perfil"])) {
 
     <div class="row ">
         <div class="form-group col-md-12">
-            <h2 class=""><strong>INSCRIPCION DE PROYECTO</strong></h2>
+            <h2 class=""><strong>INSCRIPCIÓN DE PROYECTO</strong></h2>
         </div>
         <form class="form-horizontal" id="formRegistrarProyecto">  
 
             <div class="col-md-5 z-depth-5" > 
 
                 <div class="form-group">
-                    <h4 class="col-md-6">Informacion</h4>
+                    <h4 class="col-md-12">Paso 1. Ingrese Información</h4>
                 </div>
                 <div class="form-group">
                     <div class="col-md-12 ">
                         <label class=" "  for="nombreP">Titulo proyecto</label>        
-                        <input  name="nombreP" type="text" id="nombreP" class="form-control" required="true" maxlength="30" >
+                        <input  name="nombreP" type="text" id="nombreP" class="form-control" required="true" maxlength="100" >
                         <label id="error-nombreP"></label>
                     </div>
                 </div>
 
                 <div class="form-group" >
                     <div class="col-md-12">
-                        <label class="" for="resumenP">Resumen</label>
+                        <label class="" for="resumenP">Resumen (Máximo 300 palabras)</label>
 
                         <textarea name="resumenP" rows="5" id="resumenP"  class="form-control" ></textarea>
                         <label id="error-resumenP"></label>
@@ -49,13 +49,13 @@ if (!isset($_SESSION["perfil"])) {
                 </div> 
             </div>
 
-            <div class="col-md-4 col-md-push-1 z-depth-5"  >
+            <div class="col-md-6 col-md-push-1 z-depth-5"  >
                 <div class="form-group">
-                    <h5 class="col-md-12">Linea de investigacion</h5>
+                    <h4 class="col-md-12">Paso 2. Seleccione Linea de Trabajo</h4>
                 </div>
 
                 <div class="form-group linea col-md-12 lineas">
-                    <label>Linea Investigacion</label>
+                    <label>Linea de Trabajo</label>
 
                 </div>
 
@@ -64,7 +64,7 @@ if (!isset($_SESSION["perfil"])) {
 
                 <div class="form-group col-md-6 col-sm-6 col-xs-6">
 
-                    <a class="btn btn-primary"  id="mostrarLineaBoton"  >Descripcion</a>
+                    <a class="btn btn-primary"  id="mostrarLineaBoton"  >Descripción</a>
                 </div>
 
 
@@ -78,7 +78,7 @@ if (!isset($_SESSION["perfil"])) {
 
         <div class="col-md-6 col-md-push-1 z-depth-5" style="margin-top: 3%">
             <div class="form-group">
-                <h4 class="col-md-6">Tutoria</h4>
+                <h4 class="col-md-12">paso 3. Asignar Tutor</h4>
             </div>
 
             <div class="form-group docentes col-md-12">
@@ -95,14 +95,14 @@ if (!isset($_SESSION["perfil"])) {
             </div>
             <div class="form-group col-md-6" >
 
-                <a class="btn btn-primary" id="btnTutoria" style="margin-bottom: 3%">Confirmar tutoria</a>
+                <a class="btn btn-primary" id="btnTutoria" style="margin-bottom: 3%">Confirmar Tutoría</a>
             </div>
 
         </div>
 
 <div class="row z-depth-5 col-md-5" >
         <div class="">
-            <h5>Tutoria seleccionada</h5>
+            <h5>Tutoría Seleccionada</h5>
             <ul class="list-group" id="listaTutoria">
                 <li class="list-group-item list-group-item-warning"></li>
                 <li class="list-group-item list-group-item-danger">No ha seleccionado una tutoria</li>

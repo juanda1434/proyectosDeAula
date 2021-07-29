@@ -25,11 +25,12 @@ function darAccionEnviarNota() {
                 method: "post",
                 data: {enviarCalificacionC: true,
                     datosCalificacion: calificaciones},
-                dataType: 'json',
-                success: function (respuesta) {
+                success: function (respuest) {
+                    var respuesta=JSON.parse(respuest.trim());
                     if (respuesta instanceof Object) {
                         if (respuesta["exito"]) {
-                            respuestaExitoRecargar("Calificacion exitosa","Has ingresado correctamente la calificacion final.");
+                            respuestaExito("Has ingresado correctamente la calificacion final.");
+                            window.location.replace("MisProyectos");
                         } else {
                             respuestaError("Error", respuesta["error"]);
                         }
@@ -122,8 +123,8 @@ function llenarCriteriosEvaluar() {
         url: "Vista/Modulos/Ajax.php",
         method: "post",
         data: {listarCalificar: true},
-        dataType: 'json',
-        success: function (respuesta) {
+        success: function (respuest) {
+            var respuesta=JSON.parse(respuest.trim());
             llenarTablaEvaluar(respuesta);
         }
 
@@ -147,7 +148,7 @@ function llenarTablaEvaluar(respuesta) {
         for (var key in tipoCriterio) {
             var tipo = tipoCriterio[key];
 
-            tabla += "<tr class='white-text'><td class='grey darken-2'><b>" + tipo["descripcion"] + " ( " + tipo["puntos"] + " Puntos )" + "</b></td><td></td></tr>";
+            tabla += "<tr class='black-text'><td class=''><b>" + tipo["descripcion"] + " ( " + tipo["puntos"] + " Puntos )" + "</b></td><td></td></tr>";
 
             for (var key2 in criterios) {
                 var cri = criterios[key2];
@@ -159,7 +160,7 @@ function llenarTablaEvaluar(respuesta) {
                     var ingreseNota = cri.calificacion.nota == null ? "<div class='red-text' id='ingreseNota" + cri.id + "'>Ingrese nota</div>" : "";
                     var nota = cri.calificacion.nota == null ? "" : cri.calificacion.nota;
                     cri.calificacion.nota == null ? total++ : "";
-                    tabla += "<tr><td><b>" + cri["nombre"] + "</b><p>" + cri["descripcion"] + ingreseNota + "</p></td><td><p class='text-center'> " + cri.valor + "</p></td><td>" + "<input id='nota" + cri["id"] + "' va='" + cri.id + "' type='number' class='form-control entradaInput' style='margin-top: 2%;margin-left: 5%;width:60%' " + validaciones + " >  " + "</td><td >" + observa + "</td></tr>";
+                    tabla += "<tr><td><b>" + cri["nombre"] + "</b><p class='black-text'>" + cri["descripcion"] + ingreseNota + "</p></td><td><p class='text-center black-text'> " + cri.valor + "</p></td><td>" + "<input id='nota" + cri["id"] + "' va='" + cri.id + "' type='number' class='form-control entradaInput text-center' style='margin-top: 2%;margin-left: 20%;width:60%' " + validaciones + " >  " + "</td><td >" + observa + "</td></tr>";
 
                     calificaciones[cri.id] = {nota: cri.calificacion.nota, observacion: cri.calificacion.observacion, max: cri["valor"]};
 

@@ -76,31 +76,52 @@
         <div class="container">
             <ul class="nav navbar-nav padd" >
                
-            <li class="dropdown">
-                <a href="Inicio" >
-                    Inicio <span class="glyphicon glyphicon-home"></span>
-                </a>
+                <li class="dropdown">
+                    <a href="Inicio" >
+                        Inicio <span class="glyphicon glyphicon-home"></span>
+                        <ul class="dropdown-menu">
+                            <li class="active"><a href="Inicio#filtros">Filtrar Feria</a></li>
+                            <li class="active"><a href="Inicio#gale">Galeria</a></li>
+                            <li class="active"><a href="Inicio#novedades">Novedades</a></li>
+                        </ul>
+                    </a>
                 
             </li>
             
             <li class="dropdown">
                 <a href="Significado" >
                     ¿Que es? <span class="glyphicon glyphicon-info-sign"></span>
+                    <ul class="dropdown-menu">
+                            <li class="active"><a href="Significado#significado">Significado</a></li>
+                            <li class="active"><a href="Significado#historico">Historico</a></li>
+                        </ul>
                 </a>
                 
             </li>
             <li class="dropdown">
-                <a href="Importancia" >
+                <a href="Importancia">
                     Importancia <span class="glyphicon glyphicon-info-sign"></span>
+                    <ul class="dropdown-menu">
+                            <li class="active"><a href="Importancia#importancia">Importancia</a></li>
+                            <li class="active"><a href="Importancia#ventajas">Ventajas</a></li>
+                        </ul>
                 </a>
                 
             </li>
             <li class="dropdown">
                 <a href="Objetivos">
                    Objetivos <span class="glyphicon glyphicon-info-sign"></span>
+                       
                 </a>
                 
-            </li>            
+            </li>  
+            <li class="dropdown">
+                <a href="Contacto">
+                   Contacto <span class="glyphicon glyphicon-info-sign"></span>
+                       
+                </a>
+                
+            </li>
             <?php 
             if (!isset($_SESSION["perfil"])) {
                   echo '<li class="dropdown">
@@ -116,7 +137,7 @@
                 
             </li>';
 }else{
-    $aux=' <li class="dropdown">
+    $aux=' <li class="dropdown hidden-xs hidden-sm">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                         Usuario <span class="glyphicon glyphicon-user"></span>
                     </a>
@@ -126,7 +147,11 @@
                         <li class="active"><a href="MisProyectos">Mis proyectos</a></li>
                         <li class="active"><a href="Salir">Salir</a></li>
 
-</ul> </li>';
+</ul> </li> 
+<li class="dropdown hidden-md hidden-lg"><a href="Perfil"> Perfil <span class="glyphicon glyphicon-user
+"></span></a></li>
+<li class="dropdown hidden-md hidden-lg"><a href="MisProyectos">MisProyectos <span class="glyphicon glyphicon-book"></span></a></li>
+            <li class="dropdown hidden-md hidden-lg"><a href="Salir"> Salir <span class="glyphicon glyphicon-log-out"></span> </a></li>';
     
     echo $aux;
    

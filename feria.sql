@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-11-2017 a las 20:24:05
+-- Tiempo de generación: 22-10-2017 a las 07:24:44
 -- Versión del servidor: 10.1.19-MariaDB
 -- Versión de PHP: 5.6.28
 
@@ -54,21 +54,6 @@ CREATE TABLE `calificacion` (
   `idcriterio` int(11) NOT NULL,
   `observacion` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `calificacion`
---
-
-INSERT INTO `calificacion` (`id`, `idevaluador`, `nota`, `idcriterio`, `observacion`) VALUES
-(37, 1, 10, 1, NULL),
-(38, 1, 10, 2, NULL),
-(39, 1, 2, 3, NULL),
-(40, 1, 2, 4, NULL),
-(41, 1, 19, 5, NULL),
-(42, 1, 10, 6, NULL),
-(43, 1, 6, 7, NULL),
-(44, 1, 9, 8, NULL),
-(45, 1, 8, 9, NULL);
 
 -- --------------------------------------------------------
 
@@ -124,14 +109,7 @@ INSERT INTO `criterioferia` (`id`, `idcriterioevaluacion`, `valor`, `idferia`, `
 (6, 6, 10, 1, 2),
 (7, 7, 10, 1, 2),
 (8, 8, 10, 1, 2),
-(9, 9, 10, 1, 2),
-(10, 1, 10, 2, 1),
-(11, 1, 20, 6, 1),
-(13, 1, 10, 7, 1),
-(14, 1, 10, 8, 1),
-(15, 1, 10, 9, 1),
-(16, 1, 10, 10, 1),
-(17, 1, 10, 11, 1);
+(9, 9, 10, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -194,13 +172,12 @@ CREATE TABLE `estudiante` (
 --
 
 INSERT INTO `estudiante` (`id`, `nombre`, `correo`, `codigo`, `documento`, `contrasenia`, `codigoprograma`, `validarregistro`) VALUES
-(64, 'Juan David Sanchez Mancilla', 'palo1494@gmail.com', '1308', '1090505893', '1234567', '116', NULL),
-(65, 'Leabiv', 'leabiv@gmail.com', '1310', '1234', '1234567', '115', 'bb16092ac181c6d02aba5a5cc1d49f2c'),
+(64, 'Juan David Sanchez Mancilla', 'palo1494@gmail.com', '1308', '1090505893', 'd9a1oo30', '116', NULL),
+(65, 'Leabiv', 'leabiv@gmail.com', '1310', '1234', '12345', '115', 'bb16092ac181c6d02aba5a5cc1d49f2c'),
 (67, 'Juan David Sanchez Mancilla', 'juandavidsm@ufps.edu.co', '1308', '1090505894', '1234567', '115', NULL),
 (68, 'laura', 'lauridani1@hotmail.com', 'laur', 'laura1261', 'laura126', '115', 'dfff79e318ef82430062887915a4d0ed'),
-(69, 'juan ñoño', 'palo1493@hotmail.com', '1390', '1090505897', '1234567', '115', 'faac7afd976232de30639971c0418e8f'),
-(70, 'luis alexander', 'alexanderpenaloza@gmail.com', '1151', '1090494143', '1234567', '115', '88fff171fa39603147b953534436dee6'),
-(72, 'alexander peñaloza', 'alexanderpenaloza3@gmail.com', '1163', '1090', '1234567', '115', '4d9d0022bf194cddf909f7f2a0094e3e');
+(69, 'juan ñoño', 'palo1493@hotmail.com', '1390', '1090505897', 'd9a1oo30', '115', 'faac7afd976232de30639971c0418e8f'),
+(70, 'luis alexander', 'alexanderpenaloza@gmail.com', '1151', '1090494143', 'asd', '115', '88fff171fa39603147b953534436dee6');
 
 -- --------------------------------------------------------
 
@@ -216,13 +193,6 @@ CREATE TABLE `evaluador` (
   `contrasenia` varchar(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `evaluador`
---
-
-INSERT INTO `evaluador` (`id`, `nombre`, `correo`, `documento`, `contrasenia`) VALUES
-(1, 'Soy un evaluador de prueba', 'juandavidsm@ufp', '1090505893', '1234567');
-
 -- --------------------------------------------------------
 
 --
@@ -235,13 +205,6 @@ CREATE TABLE `evaluadorferia` (
   `idferia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `evaluadorferia`
---
-
-INSERT INTO `evaluadorferia` (`id`, `idevaluador`, `idferia`) VALUES
-(1, 1, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -253,13 +216,6 @@ CREATE TABLE `evaluadorproyecto` (
   `idevaluadorferia` int(11) NOT NULL,
   `idproyecto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `evaluadorproyecto`
---
-
-INSERT INTO `evaluadorproyecto` (`id`, `idevaluadorferia`, `idproyecto`) VALUES
-(1, 1, 17);
 
 -- --------------------------------------------------------
 
@@ -281,14 +237,13 @@ CREATE TABLE `feria` (
 --
 
 INSERT INTO `feria` (`id`, `fechainicio`, `resumen`, `nombre`, `fechalimiteinscripcion`, `fechafinal`) VALUES
-(1, '2017-11-25', 'En el marco de las asignaturas de la carrera de Ingeniería de Sistemas guiadas en el semestre, los estudiantes de la carrera desarrollan proyectos de aula, en los cuales integran sus habilidades y conocimientos adquiridos en las demás asignaturas a lo largo del semestre y de la carrera.', 'Feria de testing', '2017-11-24', NULL),
-(2, NULL, 'Feria de prueba para cards', 'Feria proyectos de a', '2017-11-24', NULL),
-(6, NULL, 'Feria de prueba para cards', 'Feria proyectos III', '2017-11-24', NULL),
-(7, NULL, 'Feria de prueba para cards', 'Feria proyectos de proyectos de aula III', '2017-11-20', NULL),
-(8, NULL, 'En el marco de las asignaturas de la carrera de Ingeniería de Sistemas guiadas en el semestre, los estudiantes de la carrera desarrollan proyectos de aula, en los cuales integran sus habilidades y conocimientos adquiridos en las demás asignaturas a lo largo del semestre y de la carrera.', 'Feria proyectos de proyectos de aula IV', '2017-11-21', NULL),
-(9, NULL, 'En el marco de las asignaturas de la carrera de Ingeniería de Sistemas guiadas en el semestre, los estudiantes de la carrera desarrollan proyectos de aula, en los cuales integran sus habilidades y conocimientos adquiridos en las demás asignaturas a lo largo del semestre y de la carrera.', 'Muestra de proyectos de aula', '2017-11-22', NULL),
-(10, NULL, 'En el marco de las asignaturas de la carrera de Ingeniería de Sistemas guiadas en el semestre, los estudiantes de la carrera desarrollan proyectos de aula, en los cuales integran sus habilidades y conocimientos adquiridos en las demás asignaturas a lo largo del semestre y de la carrera.', 'Muestra de proyectos de aula II', '2017-11-23', NULL),
-(11, '2017-11-26', 'En el marco de las asignaturas de la carrera de Ingeniería de Sistemas guiadas en el semestre, los estudiantes de la carrera desarrollan proyectos de aula, en los cuales integran sus habilidades y conocimientos adquiridos en las demás asignaturas a lo largo del semestre y de la carrera.', 'Feria de empleo', '2017-11-25', NULL);
+(1, NULL, 'En el marco de las asignaturas de la carrera de Ingeniería de Sistemas guiadas en el semestre, los estudiantes de la carrera desarrollan proyectos de aula, en los cuales integran sus habilidades y conocimientos adquiridos en las demás asignaturas a lo largo del semestre y de la carrera.', 'Feria de testing', '2017-10-31', NULL),
+(2, NULL, 'Feria de prueba para cards', 'Feria proyectos de a', '2017-10-20', NULL),
+(6, NULL, 'Feria de prueba para cards', 'Feria proyectos III', '2017-10-18', NULL),
+(7, NULL, 'Feria de prueba para cards', 'Feria proyectos de proyectos de aula III', '2017-10-18', NULL),
+(8, NULL, 'En el marco de las asignaturas de la carrera de Ingeniería de Sistemas guiadas en el semestre, los estudiantes de la carrera desarrollan proyectos de aula, en los cuales integran sus habilidades y conocimientos adquiridos en las demás asignaturas a lo largo del semestre y de la carrera.', 'Feria proyectos de proyectos de aula IV', '2017-10-18', NULL),
+(9, NULL, 'En el marco de las asignaturas de la carrera de Ingeniería de Sistemas guiadas en el semestre, los estudiantes de la carrera desarrollan proyectos de aula, en los cuales integran sus habilidades y conocimientos adquiridos en las demás asignaturas a lo largo del semestre y de la carrera.', 'Muestra de proyectos de aula', '2017-10-18', NULL),
+(10, NULL, 'En el marco de las asignaturas de la carrera de Ingeniería de Sistemas guiadas en el semestre, los estudiantes de la carrera desarrollan proyectos de aula, en los cuales integran sus habilidades y conocimientos adquiridos en las demás asignaturas a lo largo del semestre y de la carrera.', 'Muestra de proyectos de aula II', '2017-10-18', NULL);
 
 -- --------------------------------------------------------
 
@@ -394,9 +349,7 @@ INSERT INTO `proyecto` (`id`, `idferia`, `idlinea`, `idestado`, `titulo`, `resum
 (18, 1, 1, 1, 'Proyecto de prueba', 'Este proyecto es de prueba papu                ', NULL, 67),
 (21, 1, 1, 1, 'Feria proyectos de a', 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación de las hojas "Letraset", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición, como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.', NULL, 67),
 (23, 1, 1, 1, 'select * from estudi', 'select * from estudiante*#', NULL, 67),
-(24, 1, 1, 1, 'proyecto para prueba asdasdasd', 'resumend e proyecto para prueba asdasdasd', '3708f7999c23c06a69dc8fe8ec5e9c76', 64),
-(25, 2, 1, 1, 'Proyecto papa', 'este proyecto es un proyecto que se proyecta a ser un proyecto', NULL, 64),
-(26, 2, 1, 1, 'prueba', 'hola', NULL, 72);
+(24, 1, 1, 1, 'proyecto para prueba asdasdasd', 'resumend e proyecto para prueba asdasdasd', '3708f7999c23c06a69dc8fe8ec5e9c76', 64);
 
 -- --------------------------------------------------------
 
@@ -417,14 +370,12 @@ CREATE TABLE `proyectoestudiante` (
 INSERT INTO `proyectoestudiante` (`id`, `idestudiante`, `idproyecto`) VALUES
 (7, 64, 17),
 (10, 64, 24),
-(12, 64, 25),
 (1, 67, 17),
 (2, 67, 18),
 (8, 67, 21),
 (9, 67, 23),
 (11, 67, 24),
-(3, 70, 17),
-(13, 72, 26);
+(3, 70, 17);
 
 -- --------------------------------------------------------
 
@@ -449,9 +400,7 @@ INSERT INTO `proyectotutoria` (`id`, `idproyecto`, `idtutoria`) VALUES
 (6, 21, 3),
 (9, 23, 3),
 (10, 23, 6),
-(11, 24, 7),
-(12, 25, 8),
-(13, 26, 3);
+(11, 24, 7);
 
 -- --------------------------------------------------------
 
@@ -494,7 +443,6 @@ INSERT INTO `tutoria` (`id`, `codigodocente`, `codigoasignatura`, `codigoprogram
 (7, '1234', '0101', '116', '115'),
 (3, '1234', '5605', '115', '115'),
 (4, '1234', '5609', '115', '115'),
-(8, '2345', '0101', '116', '115'),
 (6, '2345', '5609', '115', '115');
 
 --
@@ -665,7 +613,7 @@ ALTER TABLE `tutoria`
 -- AUTO_INCREMENT de la tabla `calificacion`
 --
 ALTER TABLE `calificacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `criterioevaluacion`
 --
@@ -675,7 +623,7 @@ ALTER TABLE `criterioevaluacion`
 -- AUTO_INCREMENT de la tabla `criterioferia`
 --
 ALTER TABLE `criterioferia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `estadoproyecto`
 --
@@ -685,27 +633,27 @@ ALTER TABLE `estadoproyecto`
 -- AUTO_INCREMENT de la tabla `estudiante`
 --
 ALTER TABLE `estudiante`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 --
 -- AUTO_INCREMENT de la tabla `evaluador`
 --
 ALTER TABLE `evaluador`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `evaluadorferia`
 --
 ALTER TABLE `evaluadorferia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `evaluadorproyecto`
 --
 ALTER TABLE `evaluadorproyecto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `feria`
 --
 ALTER TABLE `feria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `feriapatrocinador`
 --
@@ -725,17 +673,17 @@ ALTER TABLE `patrocinador`
 -- AUTO_INCREMENT de la tabla `proyecto`
 --
 ALTER TABLE `proyecto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT de la tabla `proyectoestudiante`
 --
 ALTER TABLE `proyectoestudiante`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `proyectotutoria`
 --
 ALTER TABLE `proyectotutoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `tipocriterio`
 --
@@ -745,7 +693,7 @@ ALTER TABLE `tipocriterio`
 -- AUTO_INCREMENT de la tabla `tutoria`
 --
 ALTER TABLE `tutoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Restricciones para tablas volcadas
 --

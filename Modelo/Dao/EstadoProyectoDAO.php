@@ -2,8 +2,13 @@
 
 class EstadoProyectoDAO {
 
+     private $conexion;
+    public function __construct() {
+        $conn = new Conexion();
+        $this->conexion=$conn->crearConexion();
+    }
     public function buscarIdEstado() {
-        $conexion = Conexion::crearConexion();
+        $conexion = $this->conexion;
         $idEstado=false;
         try {
             $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

@@ -11,3 +11,4 @@ RewriteRule ^LProyecto=(\d+)$  index.php?ubicacion=Proyecto&id=$1
 RewriteRule ^Feria=(\d+)$ index.php?ubicacion=Feria&id=$1
 RewriteRule ^unirse=(\d+)-(\w+)$ index.php?ubicacion=ValidarUnion&id=$1&key=$2
 RewriteRule ^Calificar=(\d+)&(\d+)$ index.php?ubicacion=IngresarCalificacion&proyecto=$1&feria=$2
+RewriteRule ^ContraNueva=(\w+)-(\w+)-(\w+)$ index.php?ubicacion=Recuperacion&key=$1&usuario=$2&tipo=$3

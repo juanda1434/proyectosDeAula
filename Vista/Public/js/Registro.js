@@ -15,10 +15,10 @@ $(document).ready(function () {
         },
         rules: {
             nombreE: {required: true, maxlength: 50},
-            correoE: {required: true, email: true, maxlength: 30},
+            correoE: {required: true, email: true, maxlength: 50},
             codigoE: {required: true, number: true, minlength: 4, maxlength: 4},
             documentoE: {required: true,maxlength:13},
-            contraseniaE: {required: true},
+            contraseniaE: {required: true,maxlength:8,minlength:4},
             programaE: {required: true}
         },
         messages:
@@ -28,7 +28,7 @@ $(document).ready(function () {
                     },
                     correoE: {required: "Email vacio",
                         email: "Ingrese un email correcto (asdf@asdf.com)",
-                        maxlength: "Ingrese maximo 30 caracteres"
+                        maxlength: "Ingrese maximo 50 caracteres"
                     },
                     codigoE: {
                         required: "Codigo vacio",
@@ -41,7 +41,8 @@ $(document).ready(function () {
                     },
                     contraseniaE: {
                         required:"Contraseña Vacia",
-                        maxlength:"Ingrese maximo 8 caracteres"
+                        maxlength:"Ingrese maximo 8 caracteres",
+                        minlength:"Ingrese minimo 4 caracteres"
                         
                     },
                     programaE: {required: "Seleccione un programa academico"}
@@ -60,15 +61,15 @@ $(document).ready(function () {
                 url: "Vista/Modulos/Ajax.php",
                 method: 'POST',
                 data: datos,
-                dataType: 'json',
                 beforeSend: function () {
                     respuestaInfoEspera("Espera un momento por favor.")
 
                 },
-                success: function (respuesta)
+                success: function (respuest)
                 {
+                    var respuesta=JSON.parse(respuest.trim());
                     if (respuesta["exito"]) {
-                        respuestaExitoRecargar("Registro exitoso", "Te has registro en el sistema. En breve recibiras un correo para validar tu registro.");
+                        respuestaExitoRegistro("Registro exitoso", "Te has registro en el sistema. En breve recibiras un correo para validar tu registro.");
                     } else if (!respuesta["exito"]) {
                         respuestaError("Error Registro", "Error : " + respuesta["error"]);
                     }
@@ -83,14 +84,13 @@ $("#btnEnviarCorreo").on("click",function (e){
     $.ajax({
        url:"Vista/Modulos/Ajax.php",
        method:"post",
-            dataType: 'json',
        data:{validarCorreo:true},
        beforeSend :function (){
                     respuestaInfoEspera("Espera un momento por favor.")
                     
                 },
-            success: function (respuesta) {
-                console.log(respuesta);
+            success: function (respuest) {
+                var respuesta=JSON.parse(respuest.trim());
                 if (respuesta instanceof Object) {
                     if (respuesta["exito"]) {
                         respuestaExito("Se ha enviado un mensaje a tu correo electronico para que valides tu registro.");

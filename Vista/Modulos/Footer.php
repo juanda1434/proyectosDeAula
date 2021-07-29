@@ -54,8 +54,8 @@
                     <address class="md-margin-bottom-40">
                         Avenida Gran Colombia No. 12E-96 Barrio Colsag, <br>
                         San José de Cúcuta - Colombia <br>
-                        Teléfono (057)(7) 5776655 <br>
-                        Correo: <a href="mailto:oficinadeprensa@ufps.edu.co" class="">oficinadeprensa@ufps.edu.co</a>
+                        Teléfono (057)(7) 5776655 Extensiones 201 y 203 <br>
+                        Correo: <a href="mailto:oficinadeprensa@ufps.edu.co" class="" id="correoContacto">ingsistemas@ufps.edu.co.edu.co</a>
                     </address>
                 </div><!--/col-md-3-->
                 <!-- End Address -->
@@ -77,12 +77,12 @@
                 <div class="col-md-4">  
                     <ul class="list-inline dark-social pull-right space-bottom-0">
                             <li>
-                                <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Facebook" href="https://www.facebook.com/UFPS-C%C3%BAcuta-553833261409690">
+                                <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Facebook" href="https://www.facebook.com/profile.php?id=100023177731668">
                                     <i class="fa fa-facebook"></i>
                                 </a>
                             </li>
                             <li>
-                                <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Twitter" href="https://twitter.com/UFPSCUCUTA">
+                                <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Twitter" href="https://twitter.com/ProyectosAula">
                                     <i class="fa fa-twitter"></i>
                                 </a>
                             </li>
@@ -92,7 +92,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Youtube" href="#">
+                                <a data-placement="top" data-toggle="tooltip" class="tooltips" data-original-title="Youtube" href="https://www.youtube.com/channel/UCgPz-qqaAk4lbHfr0XH3k2g">
                                     <i class="fa fa-youtube"></i>
                                 </a>
                             </li>

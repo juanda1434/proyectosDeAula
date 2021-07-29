@@ -28,6 +28,7 @@ if (!isset($_SESSION["perfil"])) {
                         <th data-breakpoints="xs">
                             Linea Investigacion                        
                         </th>
+                        <th>Horario</th>
                         <th>
                             Titulo Feria
                         </th>

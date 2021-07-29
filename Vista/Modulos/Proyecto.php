@@ -5,25 +5,37 @@
 <div class="container" style="margin-bottom: 3%">
 
 
-    <div class="row" style="margin-top: 3%">
+    <div class="row" style="margin-top: 3%" id="contenedorMostrarProyecto">
 
 
         
 
         <div class="col-md-6 z-depth-5" style="padding-bottom: 1%">
-            <div class="headline">
-                <h3 id="tituloProyecto"></h3>
+            <div id="notaFinalProyecto"> </div>
+            <div id="contieneTituloProyecto" class="row">
+                <div class="headline col-md-12">
+                <h3 id="tituloProyecto" ></h3>
         </div>
-            <div class="headline" style="margin-bottom: 12%">
-                <h4 class="col-md-6">Resumen</h4>
             </div>
-            <div class="z-depth-2 container-fluid text-justify" style="margin-bottom: 3%"><p style="margin-top: 3%" id="resumenProyecto"></p></div>
             
-            <div class="z-depth-2 container-fluid">
-                <b><h5 style="">Linea de investigacion</h5></b>
+            <div class="headline" style="margin-bottom: 12%">
+                <h4 class="col-md-6" id="resProyecto">Resumen</h4>
+            </div>
+            <div id="contieneResumenProyecto" class="row"><div class="z-depth-2 container text-justify col-md-10 col-md-offset-1"  style="margin-bottom: 3%"><p style="margin-top: 3%" id="resumenProyecto"></p></div></div>
+            
+            
+            <div class="z-depth-2 container-fluid" id="contieneLineaProyecto">
+                <b><h5 style="" id="lineaTrabajoProyecto">Linea de Trabajo</h5></b>
                 <p id="lineaProyecto"></p>
             </div>
-        </div>
+            <div id="aquiActualizarProyecto"></div>
+            
+            <?php 
+            echo isset($_SESSION["perfil"]) && $_SESSION["perfil"]["tipo"]=="Estudiante" ? ' <a href="Vista/Public/plantilla/FormatoPosterFeriaProyectoAulas.pptx" download="FormatoPoster" class="btn btn-primary" style="margin-top: 4%"><span class="glyphicon glyphicon-download-alt"></span> Descargar formato poster</a>
+        ':"";
+            ?>
+            
+           </div>
         
         <div class="col-md-5 z-depth-5 col-md-push-1" >
 

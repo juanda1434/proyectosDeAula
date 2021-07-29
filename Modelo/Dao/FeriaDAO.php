@@ -1,9 +1,14 @@
 <?php
 
 class FeriaDAO {
-
+ private $conexion;
+    public function __construct() {
+        $conn = new Conexion();
+        $this->conexion=$conn->crearConexion();
+    }
+    
     public function buscarFeriaId($id) {
-        $conexion = Conexion::crearConexion();
+        $conexion = $this->conexion;
         $exito = false;
         try {
             $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -14,7 +19,7 @@ class FeriaDAO {
                 $exito = true;
             }
         } catch (Exception $ex) {
-            
+            echo $ex;
         }
         return $exito;
     }
@@ -26,9 +31,10 @@ class FeriaDAO {
         $informacionFeria = false;
         $feria = false;
         try {
-            $criterios = CriterioFeriaDAO::listarCriterios($idFeria); 
+            $criterioFeriaDAO=new CriterioFeriaDAO();
+            $criterios = $criterioFeriaDAO->listarCriterios($idFeria); 
             if (isset($criterios["criterio"], $criterios["tipoCriterio"])) {                
-                $conexion = Conexion::crearConexion();
+                $conexion = $this->conexion;
                 $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $descripcionCriteros = $criterios["criterio"];
                 $tipoCriterio = $criterios["tipoCriterio"];
@@ -52,7 +58,7 @@ class FeriaDAO {
     }
 
     public function listarFerias($filtro) {
-        $conexion = Conexion::crearConexion();
+        $conexion = $this->conexion;
         $ferias = false;
         try {
             $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -71,13 +77,13 @@ class FeriaDAO {
                 }
             }
         } catch (Exception $ex) {
-            
+            echo $ex;
         }
         return $ferias;
     }
 
     public function listarFeriasParticipacionEstudiante($filtro) {
-        $conexion = Conexion::crearConexion();
+        $conexion = $this->conexion;
         $ferias = false;
         try {
             $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -102,7 +108,7 @@ class FeriaDAO {
     }
 
     public function listarFeriasParticipacionEvaluador($filtro) {
-        $conexion = Conexion::crearConexion();
+        $conexion = $this->conexion;
         $ferias = false;
         try {
             $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -130,9 +136,9 @@ class FeriaDAO {
         $sql1 = "select feria.id,feria.nombre,feria.resumen,";
         $sql2 = "select count(feria.id)as total from feria";
         switch ($filtro["estado"]) {
-            case "Activa":
-                $sql1.= "feria.fechalimiteinscripcion as limite from feria INNER JOIN (SELECT feria.id,COUNT(criterioferia.id) as total FROM criterioferia INNER JOIN feria on feria.id=criterioferia.idferia INNER JOIN tipocriterio on tipocriterio.id=criterioferia.idtipo INNER JOIN criterioevaluacion on criterioevaluacion.id= criterioferia.idcriterioevaluacion GROUP BY feria.id)x on x.id=feria.id where x.total>0 and feria.fechalimiteinscripcion>=curdate() and feria.fechafinal is null and if(feria.fechainicio is not null, if(feria.fechalimiteinscripcion<feria.fechainicio,true,false),true)";
-                $sql2 .=" INNER JOIN (SELECT feria.id,COUNT(criterioferia.id) as total FROM criterioferia INNER JOIN feria on feria.id=criterioferia.idferia INNER JOIN tipocriterio on tipocriterio.id=criterioferia.idtipo INNER JOIN criterioevaluacion on criterioevaluacion.id= criterioferia.idcriterioevaluacion group by feria.id)x on x.id=feria.id where x.total>0 and feria.fechalimiteinscripcion>=curdate() and feria.fechafinal is null and if(feria.fechainicio is not null, if(feria.fechalimiteinscripcion<feria.fechainicio,true,false),true)";
+            case "Inscripcion":
+                $sql1.= "feria.fechalimiteinscripcion as limite from feria INNER JOIN (SELECT feria.id,COUNT(criterioferia.id) as total FROM criterioferia INNER JOIN feria on feria.id=criterioferia.idferia INNER JOIN tipocriterio on tipocriterio.id=criterioferia.idtipo INNER JOIN criterioevaluacion on criterioevaluacion.id= criterioferia.idcriterioevaluacion GROUP BY feria.id)x on x.id=feria.id where x.total>0 and feria.fechalimiteinscripcion>=curdate() and feria.fechafinal is null and if(feria.fechainicio is not null, if(feria.fechalimiteinscripcion<feria.fechainicio,true,false),true) ";
+                $sql2 .=" INNER JOIN (SELECT feria.id,COUNT(criterioferia.id) as total FROM criterioferia INNER JOIN feria on feria.id=criterioferia.idferia INNER JOIN tipocriterio on tipocriterio.id=criterioferia.idtipo INNER JOIN criterioevaluacion on criterioevaluacion.id= criterioferia.idcriterioevaluacion group by feria.id)x on x.id=feria.id where x.total>0 and feria.fechalimiteinscripcion>=curdate() and feria.fechafinal is null and if(feria.fechainicio is not null, if(feria.fechalimiteinscripcion<feria.fechainicio,true,false),true) ";
                 if ($filtro["valor"] == "Fecha") {
                     $sql1.= " order by feria.fechalimiteinscripcion ";
                 }
@@ -142,6 +148,13 @@ class FeriaDAO {
                 $sql2.=" where feria.fechafinal is not null";
                 if ($filtro["valor"] == "Fecha") {
                     $sql1.= " order by feria.fechafinal ";
+                }
+                break;
+            case "Activa":
+                $sql1.="feria.fechalimiteinscripcion as limite,feria.fechainicio as inicio from feria INNER JOIN (SELECT feria.id,COUNT(criterioferia.id) as total FROM criterioferia INNER JOIN feria on feria.id=criterioferia.idferia INNER JOIN tipocriterio on tipocriterio.id=criterioferia.idtipo INNER JOIN criterioevaluacion on criterioevaluacion.id= criterioferia.idcriterioevaluacion GROUP BY feria.id)x on x.id=feria.id where x.total>0 and feria.fechalimiteinscripcion is not null and feria.fechafinal is null and if(feria.fechainicio is not null,if(feria.fechalimiteinscripcion<feria.fechainicio and feria.fechainicio>=curdate(),true,false),true) ";
+                $sql2.=" INNER JOIN (SELECT feria.id,COUNT(criterioferia.id) as total FROM criterioferia INNER JOIN feria on feria.id=criterioferia.idferia INNER JOIN tipocriterio on tipocriterio.id=criterioferia.idtipo INNER JOIN criterioevaluacion on criterioevaluacion.id= criterioferia.idcriterioevaluacion GROUP BY feria.id)x on x.id=feria.id where x.total>0 and feria.fechalimiteinscripcion is not null and feria.fechafinal is null and if(feria.fechainicio is not null,if(feria.fechalimiteinscripcion<feria.fechainicio and feria.fechainicio>=curdate(),true,false),true) ";
+                if ($filtro["valor"] == "Fecha") {
+                    $sql1.= " order by feria.fechalimiteinscripcion ";
                 }
                 break;
         }
@@ -160,7 +173,7 @@ class FeriaDAO {
         $sql2 = "select count(feria.id)as total from feria";
         $id = $filtro["idEstu"];
         switch ($filtro["estado"]) {
-            case "Activa":
+            case "Inscripcion":
                 $sql1.= "feria.fechalimiteinscripcion as limite from feria INNER JOIN proyecto on proyecto.idferia = feria.id INNER JOIN proyectoestudiante on proyectoestudiante.idproyecto=proyecto.id INNER JOIN estudiante on estudiante.id=proyectoestudiante.idestudiante INNER JOIN (SELECT feria.id,COUNT(criterioferia.id) as total FROM criterioferia INNER JOIN feria on feria.id=criterioferia.idferia INNER JOIN tipocriterio on tipocriterio.id=criterioferia.idtipo INNER JOIN criterioevaluacion on criterioevaluacion.id= criterioferia.idcriterioevaluacion GROUP BY feria.id)x on x.id=feria.id where x.total>0 and feria.fechalimiteinscripcion >=curdate() and feria.fechafinal is null and IF(feria.fechainicio is not null, IF(feria.fechalimiteinscripcion<=feria.fechainicio,true,false) ,true) and estudiante.id=$id ";
                 $sql2.=" INNER JOIN proyecto on proyecto.idferia = feria.id INNER JOIN proyectoestudiante on proyectoestudiante.idproyecto=proyecto.id INNER JOIN estudiante on estudiante.id=proyectoestudiante.idestudiante INNER JOIN (SELECT feria.id,COUNT(criterioferia.id) as total FROM criterioferia INNER JOIN feria on feria.id=criterioferia.idferia INNER JOIN tipocriterio on tipocriterio.id=criterioferia.idtipo INNER JOIN criterioevaluacion on criterioevaluacion.id= criterioferia.idcriterioevaluacion )x on x.id=feria.id where x.total>0 and feria.fechalimiteinscripcion >=curdate() and feria.fechafinal is null and IF(feria.fechainicio is not null, IF(feria.fechalimiteinscripcion<=feria.fechainicio,true,false) ,true) and estudiante.id=$id";
                 if ($filtro["valor"] == "Fecha") {
@@ -172,6 +185,13 @@ class FeriaDAO {
                 $sql2.= " INNER JOIN proyecto on proyecto.idferia = feria.id INNER JOIN proyectoestudiante on proyectoestudiante.idproyecto=proyecto.id INNER JOIN estudiante on estudiante.id=proyectoestudiante.idestudiante where fechafinal is not null and estudiante.id=$id ";
                 if ($filtro["valor"] == "Fecha") {
                     $sql1.= " order by feria.fechafinal ";
+                }
+                break;
+            case "Activa":
+                $sql1.="feria.fechalimiteinscripcion as limite,feria.fechainicio as inicio from feria INNER JOIN proyecto on proyecto.idferia = feria.id INNER JOIN proyectoestudiante on proyectoestudiante.idproyecto=proyecto.id INNER JOIN estudiante on estudiante.id=proyectoestudiante.idestudiante INNER JOIN (SELECT feria.id,COUNT(criterioferia.id) as total FROM criterioferia INNER JOIN feria on feria.id=criterioferia.idferia INNER JOIN tipocriterio on tipocriterio.id=criterioferia.idtipo INNER JOIN criterioevaluacion on criterioevaluacion.id= criterioferia.idcriterioevaluacion GROUP BY feria.id)x on x.id=feria.id where x.total>0 and feria.fechalimiteinscripcion is not null and feria.fechafinal is null and if(feria.fechainicio is not null,if(feria.fechalimiteinscripcion<feria.fechainicio and feria.fechainicio>=curdate(),true,false),true) and estudiante.id=$id ";
+                $sql2.=" INNER JOIN proyecto on proyecto.idferia = feria.id INNER JOIN proyectoestudiante on proyectoestudiante.idproyecto=proyecto.id INNER JOIN estudiante on estudiante.id=proyectoestudiante.idestudiante INNER JOIN (SELECT feria.id,COUNT(criterioferia.id) as total FROM criterioferia INNER JOIN feria on feria.id=criterioferia.idferia INNER JOIN tipocriterio on tipocriterio.id=criterioferia.idtipo INNER JOIN criterioevaluacion on criterioevaluacion.id= criterioferia.idcriterioevaluacion GROUP BY feria.id)x on x.id=feria.id where x.total>0 and feria.fechalimiteinscripcion is not null and feria.fechafinal is null and if(feria.fechainicio is not null,if(feria.fechalimiteinscripcion<feria.fechainicio and feria.fechainicio>=curdate(),true,false),true) and estudiante.id=$id ";
+                if ($filtro["valor"] == "Fecha") {
+                    $sql1.= " order by feria.fechalimiteinscripcion ";
                 }
                 break;
         }
@@ -191,7 +211,7 @@ class FeriaDAO {
         $sql2 = "select count(feria.id)as total from feria";
         $id = $filtro["idEva"];
         switch ($filtro["estado"]) {
-            case "Activa":
+            case "Inscripcion":
                 $sql1.= " feria.fechalimiteinscripcion as limite from feria INNER JOIN evaluadorferia on evaluadorferia.idferia=feria.id INNER JOIN evaluador ON evaluadorferia.idevaluador=evaluador.id INNER JOIN (SELECT feria.id,COUNT(criterioferia.id) as total FROM criterioferia INNER JOIN feria on feria.id=criterioferia.idferia INNER JOIN tipocriterio on tipocriterio.id=criterioferia.idtipo INNER JOIN criterioevaluacion on criterioevaluacion.id= criterioferia.idcriterioevaluacion GROUP BY feria.id)x on x.id=feria.id where x.total>0 and feria.fechalimiteinscripcion >=curdate() and fechafinal is null and IF(fechainicio is not null, IF(fechalimiteinscripcion<=fechainicio,true,false) ,true) and evaluador.id=$id ";
                 $sql2.=" INNER JOIN evaluadorferia on evaluadorferia.idferia=feria.id INNER JOIN evaluador ON evaluadorferia.idevaluador=evaluador.id INNER JOIN (SELECT feria.id,COUNT(criterioferia.id) as total FROM criterioferia INNER JOIN feria on feria.id=criterioferia.idferia INNER JOIN tipocriterio on tipocriterio.id=criterioferia.idtipo INNER JOIN criterioevaluacion on criterioevaluacion.id= criterioferia.idcriterioevaluacion)x on x.id=feria.id where x.total>0 and feria.fechalimiteinscripcion >=curdate() and fechafinal is null and IF(fechainicio is not null, IF(fechalimiteinscripcion<=fechainicio,true,false) ,true) and evaluador.id=$id  ";
                 if ($filtro["valor"] == "Fecha") {
@@ -203,6 +223,13 @@ class FeriaDAO {
                 $sql2.= " INNER JOIN proyecto on proyecto.idferia = feria.id INNER JOIN evaluadorferia on evaluadorferia.idferia=feria.id INNER JOIN evaluador ON evaluadorferia.idevaluador=evaluador.id where fechafinal is not null and evaluador.id=$id ";
                 if ($filtro["valor"] == "Fecha") {
                     $sql1.= " order by fechafinal ";
+                }
+                break;
+            case "Activa":
+                $sql1.=" feria.fechalimiteinscripcion as limite,feria.fechainicio as inicio from feria INNER JOIN evaluadorferia on evaluadorferia.idferia=feria.id INNER JOIN evaluador ON evaluadorferia.idevaluador=evaluador.id INNER JOIN (SELECT feria.id,COUNT(criterioferia.id) as total FROM criterioferia INNER JOIN feria on feria.id=criterioferia.idferia INNER JOIN tipocriterio on tipocriterio.id=criterioferia.idtipo INNER JOIN criterioevaluacion on criterioevaluacion.id= criterioferia.idcriterioevaluacion GROUP BY feria.id)x on x.id=feria.id where x.total>0 and feria.fechalimiteinscripcion is not null and feria.fechafinal is null and if(feria.fechainicio is not null,if(feria.fechalimiteinscripcion<feria.fechainicio and feria.fechainicio>=curdate(),true,false),true) and evaluador.id=$id ";
+                $sql2.=" INNER JOIN evaluadorferia on evaluadorferia.idferia=feria.id INNER JOIN evaluador ON evaluadorferia.idevaluador=evaluador.id INNER JOIN (SELECT feria.id,COUNT(criterioferia.id) as total FROM criterioferia INNER JOIN feria on feria.id=criterioferia.idferia INNER JOIN tipocriterio on tipocriterio.id=criterioferia.idtipo INNER JOIN criterioevaluacion on criterioevaluacion.id= criterioferia.idcriterioevaluacion GROUP BY feria.id)x on x.id=feria.id where x.total>0 and feria.fechalimiteinscripcion is not null and feria.fechafinal is null and if(feria.fechainicio is not null,if(feria.fechalimiteinscripcion<feria.fechainicio and feria.fechainicio>=curdate(),true,false),true) and evaluador.id=$id ";
+                if ($filtro["valor"] == "Fecha") {
+                    $sql1.= " order by fechalimiteinscripcion ";
                 }
                 break;
         }

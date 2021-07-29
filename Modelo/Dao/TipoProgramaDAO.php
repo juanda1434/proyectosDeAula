@@ -13,8 +13,14 @@
  */
 class TipoProgramaDAO {
 
+    private $conexion;
+    public function __construct() {
+        $conn = new Conexion();
+        $this->conexion=$conn->crearConexion();
+    }
+    
     public function obtenerCodigoPrograma($nombre) {
-        $conexion = Conexion::crearConexion();
+        $conexion = $this->conexion;
         $codigo = false;
         try {
             $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -32,7 +38,7 @@ class TipoProgramaDAO {
     }
 
     public function listarProgramasAcademicos() {
-        $conexion = Conexion::crearConexion();
+        $conexion = $this->conexion;
         $codigo = false;
         $programas = false;
         try {

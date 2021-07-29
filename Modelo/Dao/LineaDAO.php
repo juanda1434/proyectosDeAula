@@ -1,9 +1,14 @@
 <?php
 
 class LineaDAO {
- 
+  private $conexion;
+    public function __construct() {
+        $conn = new Conexion();
+        $this->conexion=$conn->crearConexion();
+    }
+    
     public function listarLineasInvestigacion(){
-        $conexion= Conexion::crearConexion();
+        $conexion= $this->conexion;
         $lineas=false;
         try{
             $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -19,7 +24,7 @@ class LineaDAO {
     }
     
     public function validarLineaNombre($nombre){
-        $conexion=  Conexion::crearConexion();
+        $conexion=  $this->conexion;
         $exito=false;
         try {
             $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

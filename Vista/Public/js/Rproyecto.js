@@ -36,7 +36,7 @@ $(document).ready(function () {
                         {
                             nombreP: "Nombre vacio",
                             resumenP: "Codigo vacio",
-                            lineaP: "Seleccione una linea de investigacion"
+                            lineaP: "Seleccione una linea de trabajo"
 
                         },
                 submitHandler: function (form) {
@@ -49,9 +49,10 @@ $(document).ready(function () {
                         url: "Vista/Modulos/Ajax.php",
                         method: 'POST',
                         data: datos,
-                        dataType: 'json',
-                        success: function (respuesta)
+                        success: function (respuest)
                         {
+                            var respuesta= JSON.parse(respuest.trim());
+                            var respuesta=JSON.parse(respuest.trim());
 
                             if (respuesta["exito"]) {
                                 respuestaExitoRecargar("Registro Exitoso", "Has registrado un proyecto de manera exitosa.\nPuedes modificar los datos del proyecto e invitar a tus compañeros");
@@ -87,8 +88,9 @@ function enviarTutoria() {
         url: "Vista/Modulos/Ajax.php",
         method: "POST",
         data: datos,
-        dataType: 'json',
-        success: function (respuesta) {
+        success: function (respuest) {
+            console.log(respuest);
+            var respuesta= JSON.parse(respuest.trim());
             if (respuesta instanceof Object) {
                 if (respuesta["exito"]) {
                     respuestaExito("Seleccionaste una tutoria");
@@ -107,9 +109,9 @@ function llenarDocentes() {
     $.ajax(
             {
                 url: "Vista/Modulos/Ajax.php?docentes=true",
-                dataType: 'json',
-                success: function (respuesta)
+                success: function (respuest)
                 {
+                    var respuesta= JSON.parse(respuest.trim());
                     if (respuesta instanceof Object) {
                         var opciones = "";
                         for (var i = 0; i < respuesta.length; i++) {
@@ -132,9 +134,9 @@ function llenarAsignaturas() {
     $.ajax(
             {
                 url: "Vista/Modulos/Ajax.php?asignaturas=true",
-                dataType: 'json',
-                success: function (respuesta)
+                success: function (respuest)
                 {
+                    var respuesta= JSON.parse(respuest.trim());
                     if (respuesta instanceof Object) {
                         var opciones = "";
                         for (var i = 0; i < respuesta.length; i++) {
@@ -168,9 +170,9 @@ function llenarLineasInvestigacion() {
     $.ajax(
             {
                 url: "Vista/Modulos/Ajax.php?lineasInvestigacion=true",
-                dataType: 'json',
-                success: function (respuesta)
+                success: function (respuest)
                 {
+                    var respuesta=JSON.parse(respuest.trim());
                     lineas = [];
                     if (respuesta instanceof Object) {
                         var opciones = "";
@@ -179,9 +181,9 @@ function llenarLineasInvestigacion() {
                             opciones += '<option  value="' + asignatura["nombre"] + '">' + asignatura["nombre"] + '</option>';
                             lineas[asignatura["nombre"]] = asignatura["descripcion"];
                         }
-                        var inicio = '<label class="" for="lineaP">Linea de investigacion</label>\n\
+                        var inicio = '<label class="" for="lineaP">Linea de Trabajo</label>\n\
 <select name="lineaP" class="form-control" id="lineaP">\n\
-<option  value="">Seleccione Linea</option>';
+<option  value="">Seleccione Linea de Trabajo</option>';
                         var fin = '</select><label id="error-lineaP"></label></div>';
                         $(".lineas").html(inicio + opciones + fin);
                     }
@@ -199,7 +201,7 @@ function mostrarInfoLinea(titulo, body) {
         $("#infoLineaBody").html(body);
         $("#infoLinea").modal("show");
     } else {
-        respuestaPeligro("Seleccione una linea de investigacion");
+        respuestaPeligro("Seleccione una Linea de Trabajo");
     }
 
 
@@ -212,9 +214,9 @@ function mostrarTutoriasSeleccionadas() {
     $.ajax(
             {
                 url: "Vista/Modulos/Ajax.php?tutorias=true",
-                dataType: 'json',
-                success: function (respuesta)
+                success: function (respuest)
                 {
+                    var respuesta= JSON.parse(respuest.trim());
                     if (respuesta instanceof Object) {
                         var lista = '';
                         for (var i = 0; i < respuesta.length; i++) {

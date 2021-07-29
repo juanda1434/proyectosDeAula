@@ -13,6 +13,16 @@ function respuestaExitoRecargar(titulo,mensaje){
     
     
 }
+function respuestaExitoRegistro(titulo,mensaje){
+    swal({
+        title:titulo,
+        text:mensaje,
+        icon:"success"
+        
+    }).then(function (value){        
+            window.location.replace("Ingresar");       
+    });
+}
 
 function respuestaExito(mensaje){
     swal({

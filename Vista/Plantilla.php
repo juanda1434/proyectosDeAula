@@ -1,7 +1,4 @@
-﻿<!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!--> <html lang="es"> <!--<![endif]-->
+<html lang="es"> 
     <head>
         <title>UFPS Feria proyectos aula</title>
 
@@ -102,6 +99,7 @@
         $controlador = new Controlador();
         $controlador->generarVista();
         include_once 'Modulos/Footer.php';
+        
         ?>
 
 
@@ -177,13 +175,64 @@
         <script  type="text/javascript" src="Vista/Public/js/footable.js"></script>
         <script  type="text/javascript" src="Vista/Public/js/footable.min.js"></script>
 
+        
         <!--TEXTAREA PERSONALIZADO  -->
 
-
+        <?php 
+        if (isset($_SESSION["errorValidarUnion"],$_GET["ubicacion"]) && $_GET["ubicacion"]=="Inicio") {
+            echo '<script  type="text/javascript" >
+$(document).ready(function (){
+    respuestaError("Error","No lograste unirte a un proyecto. Posiblemente ingresaste un enlace erróneo.");
+    
+});
+</script>';
+            unset($_SESSION["errorValidarUnion"]);
+        }else if (isset ($_SESSION["errorIngresarUnion"],$_GET["ubicacion"]) && $_GET["ubicacion"]=="Ingresar") {
+             echo '<script  type="text/javascript" >
+$(document).ready(function (){
+    respuestaError("Alerta","Para poder unirte a un proyecto debes Iniciar sesión.");
+    
+});
+</script>';
+             unset($_SESSION["errorIngresarUnion"]);
+        }else if (isset ($_SESSION["exitoValidarUnion"],$_GET["ubicacion"]) && $_GET["ubicacion"]=="Proyecto") {
+             
+            echo '<script  type="text/javascript" >
+$(document).ready(function (){
+    respuestaExito("Has ingresado correctamente al proyecto de aula.");
+    
+});
+</script>';
+            unset($_SESSION["exitoValidarUnion"]);
+            
+        }
+        
+        if (isset($_GET["ubicacion"])&&$_GET["ubicacion"]=="Inicio"){
+//            echo '<script>
+//        $(document).ready(function (){
+//          $("#noticia").modal("show");
+//        });
+//        
+//        </script>';
+        }
+        ?>
+        
+        
+       <!-- Modal -->
+<div class="modal fade " id="noticia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+           
+            <div class="modal-body row" id="infoLineaBody">
+                <img class="col-md-10 col-md-offset-1" src="Vista/Public/plantilla/img/TarjetaFeria.jpg">
+            </div>
+            
+        </div>
+    </div>
+</div>       
+       
     </body>
-
-
+</html>
 
     <?php
-    ob_flush();
-    
+    ob_end_flush();

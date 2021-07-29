@@ -1,9 +1,14 @@
 <?php
 
 class AsignaturaDAO {
+ private $conexion;
+    public function __construct() {
+      $con=new Conexion();
+      $this->conexion=$con->crearConexion();
+    }
 
     public function listarAsignaturas($codigoPrograma) {
-        $conexion= Conexion::crearConexion();
+        $conexion= $this->conexion;
         
         try{
             $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -21,13 +26,15 @@ class AsignaturaDAO {
     }
     
      public function listarAsignaturaCodigo($tutoriaDTO){
-        $conexion= Conexion::crearConexion();
+        $conexion= $this->conexion;
         $asignatura=false;
+         $codigoAsignatura=$tutoriaDTO->getCodigoAsignatura();
+         $codigoProgramaAsignatura=$tutoriaDTO->getCodigoProgramaAsignatura();
         try{
             $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
              $stm=$conexion->prepare("select * from asignatura where codigo=? and codigoprograma=?");
-             $stm->bindParam(1, $tutoriaDTO->getCodigoAsignatura(),PDO::PARAM_STR);
-             $stm->bindParam(2, $tutoriaDTO->getCodigoProgramaAsignatura(),PDO::PARAM_STR);
+             $stm->bindParam(1,$codigoAsignatura ,PDO::PARAM_STR);
+             $stm->bindParam(2, $codigoProgramaAsignatura,PDO::PARAM_STR);
              $ok=$stm->execute();
              if ($ok && $stm->rowCount()>0) {
                  $asignatura=$stm->fetch();

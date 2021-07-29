@@ -13,23 +13,33 @@
  */
 class CalificacionDAO {
 
-    public function registrarCalificacion($calificacionesDTO) {        
-        $conexion = Conexion::crearConexion();
-        $exito=false;
+    private $conexion;
+
+    public function __construct() {
+        $conn = new Conexion();
+        $this->conexion = $conn->crearConexion();
+    }
+
+    public function registrarCalificacion($calificacionesDTO) {
+        $conexion = $this->conexion;
+        $exito = false;
         try {
             $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $conexion->beginTransaction();
             for ($i = 0; $i < count($calificacionesDTO); $i++) {
                 $calificacionDTO = $calificacionesDTO[$i];
+                $idEvaluador = $calificacionDTO->getIdEvaluador();
+                $idCriterio = $calificacionDTO->getIdCriterio();
+                $nota = $calificacionDTO->getNota();
+                $observacion = $calificacionDTO->getObservacion();
                 $stm = $conexion->prepare("insert into calificacion (idevaluador,idcriterio,nota,observacion) values(?,?,?,?)");
-                $stm->bindParam(1, $calificacionDTO->getIdEvaluador(),PDO::PARAM_INT);
-                $stm->bindParam(2, $calificacionDTO->getIdCriterio(),PDO::PARAM_INT);
-                $stm->bindParam(3, $calificacionDTO->getNota(),PDO::PARAM_INT);
-                $stm->bindParam(4, $calificacionDTO->getObservacion(),PDO::PARAM_STR);
+                $stm->bindParam(1, $idEvaluador, PDO::PARAM_INT);
+                $stm->bindParam(2, $idCriterio, PDO::PARAM_INT);
+                $stm->bindParam(3, $nota, PDO::PARAM_INT);
+                $stm->bindParam(4, $observacion, PDO::PARAM_STR);
                 $stm->execute();
             }
-            $exito=$conexion->commit();
-            
+            $exito = $conexion->commit();
         } catch (Exception $ex) {
             $conexion->rollBack();
             echo $ex->getMessage();
